@@ -22,36 +22,12 @@ import pyjokes
 import wolframalpha
 import requests 
 from googlesearch import search
-import pyttsx3
 from urllib.request import urlopen
 from .cymath_api import slove
 
 
-# Create your views here.
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
-
 def home(request):
     return HttpResponse('This is the main page!')
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
-
-def wishMe():
-    hour = int(datetime.datetime.now().hour)
-    if hour >= 0 and hour < 12:
-        speak("Good Morning Sir !")
-
-    elif hour >= 12 and hour < 18:
-        speak("Good Afternoon Sir !")
-
-    else:
-        speak("Good Evening Sir !")
-
-    assname = ("Giya 1 point o")
-    speak("I am your Assistant")
 
 
 def assistant(request):
@@ -379,7 +355,6 @@ def evaluate(query):
         return search_results
 # Exit
     elif 'exit' in query or 'close' in query:
-            speak("Thanks for giving me your time")
             exit()
 
     # elif "who i am" in query or 'who am i':
