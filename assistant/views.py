@@ -23,7 +23,7 @@ import requests
 from googlesearch import search
 from urllib.request import urlopen
 from .cymath_api import slove
-
+link_sts = 0
 
 def home(request):
     return HttpResponse('This is the main page!')
@@ -35,10 +35,11 @@ def assistant(request):
     if request.method == 'POST':
         cmd = request.POST['cmd']
         res = evaluate(cmd)
-    return render(request,'base.html',{'cmd':cmd,'res':res})
+    return render(request,'base.html',{'cmd':cmd,'res':res,'link_sts':link_sts})
 
 def evaluate(query):
     query.lower()
+    global link_sts
 
 # On youtube
     if(('in YouTube' in query or 'on YouTube' in query) and 'search' in query):
@@ -48,17 +49,20 @@ def evaluate(query):
         query = query.replace(" on youtube", "")
         query = query.replace(" on YouTube", "")
         query = query.replace(" ", "+")
-        webbrowser.open(f"https://www.youtube.com/results?search_query={query}")
-
+        link_sts = 1
+        # webbrowser.open(f"https://www.youtube.com/results?search_query={query}")
+        return (f"https://www.youtube.com/results?search_query={query}")
  # Youtube
     elif 'youtube' in query or 'YouTube' in query:
         # speak("Here you go to Youtube\n")
-        webbrowser.open("https://www.youtube.com")
+        link_sts = 1
+        # webbrowser.open("https://www.youtube.com")
+        return ("https://www.youtube.com")
 
 
 # Pulihora
     elif 'hi' in query or 'hai' in query or 'hello' in query:
-        return
+        return ("Hello Nice to meet you")
 
     elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
         return("I am your personal voice assistant Ziya")
@@ -80,59 +84,8 @@ def evaluate(query):
 
     elif 'fine' in query or "good" in query:
             return("It's good to know that your fine")
-
-
-# Search
-    elif 'search' in query or 'play' in query or "what's" in query or "what is" in query or "what are" in query:
-        query = query.replace("search for ", "")
-        query = query.replace("what's ", "")
-        query = query.replace("what is ", "")
-        query = query.replace("what are ", "")
-        query = query.replace("search ", "")
-        query = query.replace("google ", "")
-        query = query.replace("play ", "")
-    
-        webbrowser.open(f"www.google.com/search?q={query}")
-
-    elif 'help me to' in query or 'find' in query:
-        query = query.replace("help me to ", "")
-        query = query.replace("find ", "")
-        query = query.replace(" ", "+")
-        webbrowser.open(f"www.google.com/search?q={query}")
-        return "Here is what I found on Internet"
-
-# Wikipedia
-    elif 'wikipedia' in query or 'Wikipedia about' in query :
-        # speak('Searching Wikipedia...')
-        query = query.replace("wikipedia about", "")
-        query = query.replace("wikipedia", "")
-        result = wikipedia.summary(query, sentences = 2)
-        # speak("According to Wikipedia")
-        # speak(result)
-        return (result)
-        # os.system('cls')
-# Google
-    elif 'open google' in query or 'open Google' in query:
-            # speak("Here you go to Google\n")
-            webbrowser.open("https://www.google.com")
-            # os.system('cls')
-# Stack Overflow
-    elif 'open stack overflow' in query:
-        # speak("Here you go to Stack Over flow.Happy coding")
-        webbrowser.open("stackoverflow.com")
-        # os.system('cls')
-# Instagram
-    elif 'open instagram' in query:
-        # speak("Here you go to Instagram")
-        webbrowser.open("instagram.com")
-        # os.system('cls')
-# Joke
-    elif 'joke' in query:
-        joke = pyjokes.get_joke()
-        return (joke)
-        # os.system('cls')
 # News
-    elif 'news' in query:
+    elif "news" in query:
         # BBC news api
         # following query parameters are used
         # source, sortBy and apiKey
@@ -149,24 +102,74 @@ def evaluate(query):
     
         # getting all articles in a string article
         article = open_bbc_page["articles"]
-    
-        # empty list which will
-        # contain all trending news
+
         results = []
 
         for ar in article:
             results.append(ar["title"])
 
-        # for i in range(len(results)):
 
-        #     # printing all trending news
-        #     print(i + 1, results[i])
-    
-        #to read the news out loud for us
-        # from win32com.client import Dispatch
-        # speak = Dispatch("SAPI.Spvoice")
-        # speak.Speak(results)
         return results
+
+# Search
+    elif 'search' in query or 'play' in query or "what's" in query or "what is" in query or "what are" in query:
+        query = query.replace("search for ", "")
+        query = query.replace("what's ", "")
+        query = query.replace("what is ", "")
+        query = query.replace("what are ", "")
+        query = query.replace("search ", "")
+        query = query.replace("google ", "")
+        query = query.replace("play ", "")
+        link_sts = 1
+    
+        # webbrowser.open(f"www.google.com/search?q={query}")
+        return (f"https://www.google.com/search?q={query}")
+
+    elif 'help me to' in query or 'find' in query:
+        query = query.replace("help me to ", "")
+        query = query.replace("find ", "")
+        query = query.replace(" ", "+")
+        link_sts = 1
+        # webbrowser.open(f"www.google.com/search?q={query}")
+        # return "Here is what I found on Internet"
+        return (f"https://www.google.com/search?q={query}")
+
+# Wikipedia
+    elif 'wikipedia' in query or 'Wikipedia about' in query :
+        # speak('Searching Wikipedia...')
+        query = query.replace("wikipedia about", "")
+        query = query.replace("wikipedia", "")
+        result = wikipedia.summary(query, sentences = 2)
+        # speak("According to Wikipedia")
+        # speak(result)
+        return (result)
+        # os.system('cls')
+# Google
+    elif 'open google' in query or 'open Google' in query:
+            # speak("Here you go to Google\n")
+            # webbrowser.open("https://www.google.com")
+            link_sts = 1
+            return ("https://www.google.com")
+            # os.system('cls')
+# Stack Overflow
+    elif 'open stack overflow' in query:
+        # speak("Here you go to Stack Over flow.Happy coding")
+        # webbrowser.open("https://www.stackoverflow.com")
+        link_sts = 1
+        return ("https://www.stackoverflow.com")
+        # os.system('cls')
+# Instagram
+    elif 'open Instagram' in query:
+        # speak("Here you go to Instagram")
+        # webbrowser.open("https://www.instagram.com")
+        link_sts = 1
+        return ("https://www.instagram.com")
+        # os.system('cls')
+# Joke
+    elif 'joke' in query:
+        joke = pyjokes.get_joke()
+        return (joke)
+        # os.system('cls')
 
 # Time
     elif 'the time' in query:
@@ -201,20 +204,27 @@ def evaluate(query):
 
 # Factorize
     elif 'factorize' in query:
-        try:
-            query = query.replace("factorize", "")
-            query = query.replace("power", "**")
-            query = query.replace("square", "**2")
-            query = query.replace("into", "*")
-            query = query.replace("plus", "+")
-            query = query.replace("minus", "-")
-            query = query.replace("by", "/")
-            query = query.replace(" ", "")
+        query = query.replace("simplify", "")
+        query = query.replace("power", "^")
+        query = query.replace("square", "^2")
+        query = query.replace("into", "*")
+        query = query.replace("plus", "+")
+        query = query.replace("minus", "-")
+        query = query.replace("by", "/")
 
-            res = mat.factor(query,x)
+        res =  slove(query)
+
+        if res is None:
+            query = query.replace("^2", "**2")
+            query = query.replace("^", "*")
+            query = query.replace(" ", "")
+            res = mat.factor(query)
+            if not res is None:
+                return res
+            else:
+                return "something went wrong"
+        else:
             return res
-        except:
-            return "Something went wrong"
 
 # Derivative
     elif 'derivative' in query:
