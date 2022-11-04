@@ -121,7 +121,6 @@ def evaluate(query):
         query = query.replace("google ", "")
         query = query.replace("play ", "")
         link_sts = 1
-    
         # webbrowser.open(f"www.google.com/search?q={query}")
         return (f"https://www.google.com/search?q={query}")
 
@@ -187,6 +186,7 @@ def evaluate(query):
         query = query.replace("plus", "+")
         query = query.replace("minus", "-")
         query = query.replace("by", "/")
+        query = query.replace("is equal to", "=")
 
         res =  slove(query)
 
