@@ -39,10 +39,22 @@ def assistant(request):
 
 def evaluate(query):
     query.lower()
-# Youtube
-    if 'open youtube' in query or 'open YouTube' in query:
+
+# On youtube
+    if(('in YouTube' in query or 'on YouTube' in query) and 'search' in query):
+        query = query.replace("search for ", "")
+        query = query.replace("search ", "")
+        query = query.replace(" in YouTube", "")
+        query = query.replace(" on youtube", "")
+        query = query.replace(" on YouTube", "")
+        query = query.replace(" ", "+")
+        webbrowser.open(f"https://www.youtube.com/results?search_query={query}")
+
+ # Youtube
+    elif 'youtube' in query or 'YouTube' in query:
         # speak("Here you go to Youtube\n")
-        webbrowser.open("youtube.com")
+        webbrowser.open("https://www.youtube.com")
+
 
 # Pulihora
     elif 'who are you' in query:
@@ -69,17 +81,20 @@ def evaluate(query):
 
 # Search
     elif 'search' in query or 'play' in query or "what's" in query or "what is" in query or "what are" in query:
-        query = query.replace("search for", "")
-        query = query.replace("what's", "")
-        query = query.replace("what is", "")
-        query = query.replace("what are", "")
-        query = query.replace("search", "")
-        query = query.replace("google", "")
-        query = query.replace("play", "")
-        # webbrowser.open(query)
-        webbrowser.open_new_tab(query)
+        query = query.replace("search for ", "")
+        query = query.replace("what's ", "")
+        query = query.replace("what is ", "")
+        query = query.replace("what are ", "")
+        query = query.replace("search ", "")
+        query = query.replace("google ", "")
+        query = query.replace("play ", "")
+    
 
-        return "Here what I found on Internet"
+        # query = query.replace(" ", "+")
+        webbrowser.open(f"www.google.com/search?q={query}")
+        # webbrowser.open_new_tab(query)
+
+        # return f"www.google.com/search?q={query}"
 
 # Wikipedia
     elif 'wikipedia' in query or 'Wikipedia about' in query :
@@ -92,9 +107,9 @@ def evaluate(query):
         return (result)
         # os.system('cls')
 # Google
-    elif 'open google' in query:
+    elif 'open google' in query or 'open Google' in query:
             # speak("Here you go to Google\n")
-            webbrowser.open("google.com")
+            webbrowser.open("https://www.google.com")
             # os.system('cls')
 # Stack Overflow
     elif 'open stack overflow' in query:
@@ -284,10 +299,10 @@ def evaluate(query):
         return answer
 
 # Google search
-    elif 'google' in query:
-        query = query.replace("google", "")
-        search_results = search(query, 10)
-        return search_results
+    # elif 'google' in query:
+    #     query = query.replace("google", "")
+    #     search_results = search(query, 10)
+    #     return search_results
 # Exit
     elif 'exit' in query or 'close' in query:
             exit()
