@@ -16,7 +16,6 @@ import sympy as mat
 from sympy.abc import x,y
 from sympy import diff, sin, exp
 from urllib import request
-import webbrowser
 import wikipedia
 import pyjokes
 import wolframalpha
@@ -77,7 +76,8 @@ def evaluate(query):
         query = query.replace("search", "")
         query = query.replace("google", "")
         query = query.replace("play", "")
-        webbrowser.open(query)
+        # webbrowser.open(query)
+        webbrowser.open_new_tab(query)
 
         return "Here what I found on Internet"
 
