@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+			body, head {
+				background-image: url("https://i.pinimg.com/originals/55/0c/80/550c80a326b9d687b038b5f5f72b0724.jpg");
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: 100% 100%;
+			}
+			#n {
+				text-align: right;
+				width: 175%;
+				height: 85px;
+				font-size: 35px;
+				background-color: Transparent;
+				color: white;
+				border-radius: 5px;
+			}
+			.button {
+				cursor: pointer;
+				transition: background-color 0.5s ease-out;
+				color: 0.5s ease-out;
+				width: 134px;
+				height: 80px;
+				border-radius: 5px;
+				font-size: 20px;
+				background-color: Transparent;
+				color: white
+			}
+			.button:hover {
+				background-color: white;
+				color: black;
+			}
+			#laskin {
+				margin-left: 17.5%;
+				margin-top: 10%;
+			}
+		</style>
+  </head>
+  <body>
+    <!-- <h1>Hello, world!</h1> -->
+    <form name="l" id="laskin">
+			<table>
+				<tr>
+					<td colspan="4">
+						<input type="text" name="n" id="n" disabled>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="button" value="(" class="button sulku1" onclick="l.n.value+='('"></td>-->
+          <td><input type="button" value="n!" class="button kertoma" onclick="kertoma()"></td>
+					<td><input type="button" value=")" class="button sulku2" onclick="l.n.value+=')'"></td>
+					<td><input type="button" value="10^x" class="button 10^x" onclick="l.n.value=Math.pow(10, l.n.value)"></td>
+					<td><input type="button" value="C" class="button C" onclick="l.n.value=''"></td>
+					<td><input type="button" value="+/-" class="button Plusmiinus" onclick="l.n.value*=-1"></td>
+					<td><input type="button" value="%" class="button Sadasosa" onclick="l.n.value=l.n.value / 100"></td>
+					<td><input type="button" value="/" class="button /" onclick="l.n.value+='/'"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="0-1" class="button Random" onclick="l.n.value=Math.random()"></td>
+					<td><input type="button" value="x^2" class="button x^2" onclick="l.n.value=Math.pow(l.n.value, 2)"></td>
+					<td><input type="button" value="x^3" class="button x^3" onclick="l.n.value=Math.pow(l.n.value, 3)"></td>
+					<td><input type="button" value="7" class="button 7" onclick="l.n.value+='7'"></td>
+					<td><input type="button" value="8" class="button 8" onclick="l.n.value+='8'"></td>
+					<td><input type="button" value="9" class="button 9" onclick="l.n.value+='9'"></td>
+					<td><input type="button" value="*" class="button *" onclick="l.n.value+='*'"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="ln(x)" class="button Logaritmi" onclick="l.n.value=Math.log(l.n.value)"></td>
+					<td><input type="button" value="e^x" class="button e^x" onclick="l.n.value=Math.exp(l.n.value)"></td>
+					<td><input type="button" value="&radic;x" class="button Neliöjuuri" onclick="l.n.value=Math.sqrt(l.n.value)"></td>
+					<td><input type="button" value="4" class="button 4" onclick="l.n.value+='4'"></td>
+					<td><input type="button" value="5" class="button 5" onclick="l.n.value+='5'"></td>
+					<td><input type="button" value="6" class="button 6" onclick="l.n.value+='6'"></td>
+					<td><input type="button" value="-" class="button -" onclick="l.n.value+='-'"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="sin(x)" class="button sin" onclick="l.n.value=Math.sin(l.n.value * Math.PI / 180)"></td>
+					<td><input type="button" value="cos(x)" class="button cos" onclick="l.n.value=Math.cos(l.n.value * Math.PI / 180)"></td>
+					<td><input type="button" value="3&radic;x" class="button Kuutiojuuri" onclick="l.n.value=Math.cbrt(l.n.value)"></td>
+					<td><input type="button" value="1" class="button 1" onclick="l.n.value+='1'"></td>
+					<td><input type="button" value="2" class="button 2" onclick="l.n.value+='2'"></td>
+					<td><input type="button" value="3" class="button 3" onclick="l.n.value+='3'"></td>
+					<td><input type="button" value="+" class="button +" onclick="l.n.value+='+'"></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="tan(x)" class="button tan" onclick="l.n.value=Math.tan(l.n.value * Math.PI / 180)"></td>
+					<td><input type="button" value="1/x" class="button 1/x" onclick="l.n.value=1 / l.n.value"></td>
+					<td><input type="button" value="e" class="button e" onclick="l.n.value=Math.E"></td>
+					<td><input type="button" value="π" class="button Pii" onclick="l.n.value=Math.PI"></td>
+					<td><input type="button" value="0" class="button 0" onclick="l.n.value+='0'"></td>
+					<td><input type="button" value="." class="button Piste" onclick="l.n.value+='.'"></td>
+					<td><input type="button" value="=" class="button =" onclick="l.n.value=eval(l.n.value)"></td>
+				</tr>
+			</table>
+		</form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>

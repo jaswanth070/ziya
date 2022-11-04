@@ -330,10 +330,7 @@ def evaluate(query):
     return None
 
 def test(request):
-    res = 'Give the command'
-    if (request.method == "POST"):
-        cmd = request.POST['cmd']
         
-    return render(request,'testing.html',{'res':res,'cmd':cmd,})
+    return render(request,'assistant.html')
 
 
