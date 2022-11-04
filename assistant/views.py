@@ -57,8 +57,11 @@ def evaluate(query):
 
 
 # Pulihora
-    elif 'who are you' in query:
-        return "I'm your assistant Ziya"
+    elif 'hi' in query or 'hai' in query or 'hello' in query:
+        return
+
+    elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
+        return("I am your personal voice assistant Ziya")
 
     elif "why you came to world" in query or "how you came to world" in query or "why you came to this world" in query or "how you came to this world" in query:
             return ("Thanks to Jaswanth and his team. further It's a secret")
@@ -89,12 +92,14 @@ def evaluate(query):
         query = query.replace("google ", "")
         query = query.replace("play ", "")
     
-
-        # query = query.replace(" ", "+")
         webbrowser.open(f"www.google.com/search?q={query}")
-        # webbrowser.open_new_tab(query)
 
-        # return f"www.google.com/search?q={query}"
+    elif 'help me to' in query or 'find' in query:
+        query = query.replace("help me to ", "")
+        query = query.replace("find ", "")
+        query = query.replace(" ", "+")
+        webbrowser.open(f"www.google.com/search?q={query}")
+        return "Here is what I found on Internet"
 
 # Wikipedia
     elif 'wikipedia' in query or 'Wikipedia about' in query :
