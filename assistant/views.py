@@ -6,8 +6,8 @@ import os
 import webbrowser
 import wikipedia
 import wolframalpha
-import pyttsx3
-import speech_recognition as beta
+# import pyttsx3
+# import speech_recognition as beta
 import datetime
 import json
 import operator
@@ -16,9 +16,7 @@ import sympy as mat
 from sympy.abc import x,y
 from sympy import diff, sin, exp
 from urllib import request
-import wikipedia
 import pyjokes
-import wolframalpha
 import requests 
 from googlesearch import search
 from urllib.request import urlopen
