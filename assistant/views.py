@@ -27,13 +27,13 @@ def home(request):
     return HttpResponse('This is the main page!')
 
 
-def assistant(request):
-    cmd = 'Give the command'
-    res = ''
-    if request.method == 'POST':
-        cmd = request.POST['cmd']
-        res = evaluate(cmd)
-    return render(request,'base.html',{'cmd':cmd,'res':res,'link_sts':link_sts})
+# def assistant(request):
+#     cmd = 'Give the command'
+#     res = ''
+#     if request.method == 'POST':
+#         cmd = request.POST['cmd']
+#         res = evaluate(cmd)
+#     return render(request,'base.html',{'cmd':cmd,'res':res,'link_sts':link_sts})
 
 def evaluate(query):
     query.lower()
@@ -57,30 +57,55 @@ def evaluate(query):
         # webbrowser.open("https://www.youtube.com")
         return ("https://www.youtube.com")
 
+    # Definr
+    elif 'define' in query or 'definition of' in query :
+        query = query.replace("defintion of ", "")
+        query = query.replace("define ", "")
+    
+        link_sts = 1
+        # webbrowser.open(f"www.google.com/search?q={query}")
+        return (f"https://www.google.com/search?q={query}")
+
 
 # Pulihora
+# Time
+    elif 'the time' in query:
+        link_sts = 0
+        strTime = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+        # speak(f"Sir, the time is {strTime}")
+        return(strTime)
+        # print('\n')
+
     elif 'hi' in query or 'hai' in query or 'hello' in query:
+        link_sts = 0
         return ("Hello Nice to meet you")
 
     elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
+        link_sts = 0
         return("I am your personal voice assistant Ziya")
 
     elif "why you came to world" in query or "how you came to world" in query or "why you came to this world" in query or "how you came to this world" in query:
+            link_sts = 0
             return ("Thanks to Jaswanth and his team. further It's a secret")
 
     elif "will you be my girl friend" in query:
+            link_sts = 0
             return ("I'm not sure about, may be you should give me some time")
     
     elif "i love you" in query:
+        link_sts = 0
         return("Sorry I have a Boyfriend")
 
     elif "what's your name" in query or "What is your name" in query:
+            link_sts = 0
             return "Ny friends call me Giya"
 
     elif 'how are you' in query:
+            link_sts = 0
             return ("I am fine, Thank you! How are you, Sir")
 
     elif 'fine' in query or "good" in query:
+            link_sts = 0
             return("It's good to know that your fine")
 # News
     elif "news" in query:
@@ -107,6 +132,7 @@ def evaluate(query):
             results.append(ar["title"])
 
 
+        link_sts = 0
         return results
 
 # Search
@@ -122,6 +148,8 @@ def evaluate(query):
         # webbrowser.open(f"www.google.com/search?q={query}")
         return (f"https://www.google.com/search?q={query}")
 
+
+
     elif 'help me to' in query or 'find' in query:
         query = query.replace("help me to ", "")
         query = query.replace("find ", "")
@@ -133,6 +161,7 @@ def evaluate(query):
 
 # Wikipedia
     elif 'wikipedia' in query or 'Wikipedia about' in query :
+        link_sts = 0
         # speak('Searching Wikipedia...')
         query = query.replace("wikipedia about", "")
         query = query.replace("wikipedia", "")
@@ -164,31 +193,27 @@ def evaluate(query):
         # os.system('cls')
 # Joke
     elif 'joke' in query:
+        link_sts = 0
         joke = pyjokes.get_joke()
         return (joke)
         # os.system('cls')
 
-# Time
-    elif 'the time' in query:
-        strTime = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S")
-        # speak(f"Sir, the time is {strTime}")
-        return(strTime)
-        # print('\n')
-
 # Simplify
     elif 'simplify' in query:
-        query = query.replace("simplify", "")
-        query = query.replace("power", "^")
-        query = query.replace("square", "^2")
-        query = query.replace("into", "*")
-        query = query.replace("plus", "+")
-        query = query.replace("minus", "-")
-        query = query.replace("by", "/")
-        query = query.replace("is equal to", "=")
+        link_sts = 0
+        query = query.replace("simplify ", "")
+        query = query.replace("power ", "^")
+        query = query.replace("square ", "^2")
+        query = query.replace("into ", "*")
+        query = query.replace("plus ", "+")
+        query = query.replace("minus ", "-")
+        query = query.replace("by ", "/")
+        query = query.replace("is equal to ", "=")
 
         res =  slove(query)
 
         if res is None:
+            temp = query
             query = query.replace("^2", "**2")
             query = query.replace("^", "*")
             query = query.replace(" ", "")
@@ -196,23 +221,26 @@ def evaluate(query):
             if not res is None:
                 return res.subs(query[0],2)
             else:
-                return "something went wrong"
+                link_sts = 1
+                res = google_search(temp)
         else:
             return res
 
 # Factorize
     elif 'factorize' in query:
-        query = query.replace("simplify", "")
-        query = query.replace("power", "^")
-        query = query.replace("square", "^2")
-        query = query.replace("into", "*")
-        query = query.replace("plus", "+")
-        query = query.replace("minus", "-")
-        query = query.replace("by", "/")
+        link_sts = 0
+        query = query.replace("simplify ", "")
+        query = query.replace("power ", "^")
+        query = query.replace("square ", "^2")
+        query = query.replace("into ", "*")
+        query = query.replace("plus ", "+")
+        query = query.replace("minus ", "-")
+        query = query.replace("by ", "/")
 
         res =  slove(query)
 
         if res is None:
+            temp = query
             query = query.replace("^2", "**2")
             query = query.replace("^", "*")
             query = query.replace(" ", "")
@@ -220,118 +248,128 @@ def evaluate(query):
             if not res is None:
                 return res
             else:
-                return "something went wrong"
+                link_sts = 1
+                res = google_search(temp)
         else:
             return res
 
-# Derivative
-    elif 'derivative' in query:
-        try:
-            query = query.replace("derivative of", "")
-            query = query.replace("derivative", "")
-            query = query.replace("power", "**")
-            query = query.replace("square", "**2")
-            query = query.replace("into", "*")
-            query = query.replace("plus", "+")
-            query = query.replace("minus", "-")
-            query = query.replace("by", "/")
-            query = query.replace(" ", "")
-
-            res = mat.diff(query,x)
-            return res
-        except:
-            return "Something went wrong"
-
-
 # Calculate
     elif "calculate" in query :
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('calculate')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        # speak("The answer is " + answer)
-        return answer
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('calculate')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            # speak("The answer is " + answer)
+            return answer
+        except:
+            return None
 # Find
     elif  "find" in query:
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('find')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        # speak("The answer is " + answer)
-        return answer
-# # What
-#     elif 'what' in query:
-#         app_id = "U946LA-262EX4V97V"
-#         client = wolframalpha.Client(app_id)
-#         indx = query.lower().split().index('what')
-#         query = query.split()[indx + 1:]
-#         res = client.query(' '.join(query))
-#         answer = next(res.results).text
-#         # speak("The answer is " + answer)
-        return answer
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('find')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            # speak("The answer is " + answer)
+            return answer
+        except:
+            return None
+
 # Who
     elif 'who' in query:
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('who')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        # speak("The answer is " + answer)
-        return answer
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('who')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            # speak("The answer is " + answer)
+            return answer
+        except:
+            return None
 # Where
     elif 'where' in query:
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('where')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        return answer
-# When
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('where')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            return answer
+        except:
+            return None
+# When  
     elif 'when' in query:
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('when')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        return answer
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('when')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            return answer
+        except:
+            return None
 # Why
     elif 'why' in query:
-        app_id = "U946LA-262EX4V97V"
-        client = wolframalpha.Client(app_id)
-        indx = query.lower().split().index('how')
-        query = query.split()[indx + 1:]
-        res = client.query(' '.join(query))
-        answer = next(res.results).text
-        return answer
+        try:
+            link_sts = 0
+            app_id = "U946LA-262EX4V97V"
+            client = wolframalpha.Client(app_id)
+            indx = query.lower().split().index('how')
+            query = query.split()[indx + 1:]
+            res = client.query(' '.join(query))
+            answer = next(res.results).text
+            return answer
+        except:
+            return None
 
 # Google search
     # elif 'google' in query:
     #     query = query.replace("google", "")
     #     search_results = search(query, 10)
     #     return search_results
-# Exit
-    elif 'exit' in query or 'close' in query:
-            exit()
 
     # elif "who i am" in query or 'who am i':
     #     return ("If you talk then definitely your human.")
-    
-    
 
     return None
 
-def test(request):
-    res = ''
+def assistant(request):
+    global link_sts
+    link_sts = 0
+    res = 'Give the command'
+    cmd = 'Give the command'
     if request.method == 'POST':
         cmd = request.POST['cmd']
         res = evaluate(cmd)
-    return render(request,'assistant.html',{'res':res,'link_sts':link_sts})
+        if res is None:
+            link_sts = 1
+            res = google_search(cmd)
+            return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+        else:
+            return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+
+    return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+
+def google_search(query):
+    query = query.replace(' ','+')
+    return (f"https://www.google.com/search?q={query}")
+
+def error505(request):
+    return render(request,'500error.html')
+        
 
 

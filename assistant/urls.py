@@ -20,8 +20,9 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('',views.home,name='home'),
-    path('home',views.home,name='home'),
-    path('testing',views.test,name='testing'),
+    path('',views.assistant,name='assistant'),
+    # path('home',views.home,name='home'),
+    # path('testing',views.test,name='testing'),
     path('assistant',views.assistant,name='assistant'),
+    path('error505',views.error505,name='error505'),
 ]

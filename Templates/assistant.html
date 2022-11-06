@@ -990,6 +990,7 @@
     /* light theme */
   
     .calculator {
+      margin-top: 5rem;
       background-color: #fff;
     }
   
@@ -1135,6 +1136,47 @@
 		.btn.tertiary:hover {
 			border-color: #800080
 		}
+    .link{
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgba(3, 27, 23, 0.72);
+  margin: 30px;
+  position: relative;
+  transition: transform .1s ease-in-out;
+
+}
+
+.link::before, .link::after{
+  content: "";
+  position: absolute;
+  background-color: rgba(33,255,214,0.72);
+  transition: transform .5s;
+}
+.link5{
+padding: 10px;
+}
+.link5::before,
+.link5::after{
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+  border-color: rgba(31, 7, 33, 0.72);
+  background-color: transparent;
+}
+.link5::before{
+  border-width: 1px 0;
+  transform: scaleX(0);
+}
+.link5::after{
+  border-width: 0 1px ;
+  transform: scaleY(0);
+}
+.link5:hover::before,
+.link5:hover::after{
+      transform: scale(1);
+}
 	</style>
 </head>
 
@@ -1153,16 +1195,16 @@
 				<div class="collapse navbar-collapse text-center" id="navigation">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="index.html">Home</a>
+							<a class="nav-link text-dark" href="/assistant">Home</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="faq.html">Faq</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="contact.html">contact</a>
+							<a class="nav-link text-dark" href="contact.html">Contact</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="single.html">Inner Page</a>
+							<a class="nav-link text-dark" href="#">About</a>
 						</li>
 					</ul>
 				</div>
@@ -1184,8 +1226,9 @@
 									placeholder="Have a question? Just ask here or enter terms" style="box-shadow: none;
 								resize: none;height:70px;"></textarea>
                 <div class="button-search-main">
-									<button class="btn primary" type="submit">Search</button>
+									<button class="btn primary" type="submit" >Search</button>
 								</div>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show results</button>
 								<!-- <input id="convert_text" name="cmd" class="form-control"
 								placeholder="Have a question? Just ask here or enter terms"><i
 								class="ti-search search-icon" ></i> -->
@@ -1207,8 +1250,38 @@
 	</header>
 	<!-- /header -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{cmd}}</h4>
+      </div>
+      {% if link_sts %}
+      <div class="'modal-body text-center">
+          <p>Here what I found</p>
+          <a id="clickme"  class="link link5" href="{{res}}" target="_blank" >Here you Go!</a>
+         <!-- <button class="go"><span><a href="{{res}}" target="_blank">Here You Go!</a></span></button> -->
+      </div>
+      
+      {%else%}
+        <div class="modal-body">
+          <p>{{res}}</p>
+        </div>
+      {%endif%}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- /Modal -->
 	<!-- Mic -->
-	<section class='section'>
 		<!-- <button id="click_to_convert">Voice to text</button> -->
 		<div class="PushToTalkContainer" id="click_to_convert">
 			<push-to-talk-button appid="f2e6e9f3-0174-46c2-8723-abdf85fbeb3a" capturekey=" " />
@@ -1217,8 +1290,9 @@
 		<div class="BigTranscriptContainer">
 			<big-transcript></big-transcript>
 		</div>
-	</section>
+	<!-- </section> -->
 	<!-- /Mic -->
+
 
 	<!-- Calculator -->
 	<!-- <section  class="section"> -->
@@ -1285,15 +1359,15 @@
 				</div>
 				<div class="col-md-4 text-md-right text-center">
 					<ul class="list-inline">
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
-									class="ti-facebook"></i></a></li>
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
-									class="ti-twitter-alt"></i></a></li>
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://www.instagram.com/jaswanth.m_/"><i
+									class="ti-instagram"></i></a></li>
+						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-twitter-alt"></i></a></li> -->
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://github.com/jaswanth070"><i
 									class="ti-github"></i></a>
 						</li>
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
-									class="ti-linkedin"></i></a></li>
+						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-linkedin"></i></a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -1354,6 +1428,7 @@
 			isDark = !isDark;
 		};
 	</script>
+  
 
 
   {%load static%}
