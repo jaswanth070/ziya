@@ -364,6 +364,9 @@ def assistant(request):
 
     return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
 
+def intrest_calc(request):
+    return render(request,'intrest_calc.html')
+
 def google_search(query):
     query = query.replace(' ','+')
     return (f"https://www.google.com/search?q={query}")

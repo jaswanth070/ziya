@@ -24,5 +24,6 @@ urlpatterns = [
     # path('home',views.home,name='home'),
     # path('testing',views.test,name='testing'),
     path('assistant',views.assistant,name='assistant'),
+    path('assistant/intrest_calc',views.intrest_calc,name='assistant/intrest_calc'),
     path('error505',views.error505,name='error505'),
 ]
