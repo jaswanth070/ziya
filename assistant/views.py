@@ -328,7 +328,10 @@ def evaluate(query):
     return None
 
 def test(request):
-        
-    return render(request,'assistant.html')
+    res = ''
+    if request.method == 'POST':
+        cmd = request.POST['cmd']
+        res = evaluate(cmd)
+    return render(request,'assistant.html',{'res':res,'link_sts':link_sts})
 
 

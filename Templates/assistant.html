@@ -38,7 +38,9 @@
       -webkit-font-smoothing: antialiased;
       font-size: 17px;
       color: var(--text-color);
-      background-color: var(--body-color)
+      /* background-color: var(--body-color); */
+      width:100%;
+  height:100vh;
     }
   
     p {
@@ -1045,30 +1047,93 @@
       color: #ffffff;
     }
   </style>
+
 	<script type="text/javascript" src="https://speechly.github.io/browser-ui/v2/push-to-talk-button.js"></script>
 	<script type="text/javascript" src="https://speechly.github.io/browser-ui/v2/big-transcript.js"></script>
 	<!-- <link rel="stylesheet" href="https://speechly.github.io/browser-ui/v2/speechly-ui.css"> -->
-	<style>
-		.PushToTalkContainer {
-			position: fixed;
-			box-sizing: border-box;
-			bottom: 0;
-			left: 30px;
-			right: 0;
-			max-height: 100vh;
-			padding: 0 0 3rem 0;
-			pointer-events: none;
-/* 
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			z-index: 50; */
+  
+  <style>
+    .PushToTalkContainer {
+      position: fixed;
+      box-sizing: border-box;
+      bottom: 0;
+      left: 30px;
+      right: 0;
+      max-height: 100vh;
+      padding: 0 0 3rem 0;
+      pointer-events: none;
+      /* 
+  			display: flex;
+  			flex-direction: row;
+  			justify-content: center;
+  			z-index: 50; */
+    }
+  
+    .BigTranscriptContainer {
+      position: fixed;
+      margin: 3rem 2rem 0 2rem;
+      z-index: 10;
+    }
+  </style>
+  <style>
+		.btn {
+			border: solid 2px #800080;
+			background-color: white;
+			color: #800080;
+			padding: 0 12px;
+			font-size: 1.2em;
+			height: 2.3em;
+			width: auto;
+			position: relative;
+			box-shadow: 5px 5px 0 #FFD166;
+			z-index: 2;
+			border-radius: 5px;
 		}
-
-		.BigTranscriptContainer {
-			position: fixed;
-			margin: 3rem 2rem 0 2rem;
-			z-index: 10;
+	
+	
+		.btn:hover {
+			cursor: pointer;
+		}
+	
+		.btn:before {
+			content: '';
+			width: 0;
+			height: 0;
+			bottom: 0px;
+			right: 0px;
+			position: absolute;
+			z-index: -1;
+			background: #FFD166;
+			transition: width .3s, height .3s;
+			border-top-left-radius: 5px;
+		}
+	
+	
+		.btn:hover:before {
+			width: calc(100% - 3px);
+			height: calc(100% - 3px);
+		}
+	
+	
+		/***** Variations *******/
+	
+		.btn.primary:before {
+			width: calc(100% - 4px);
+			height: calc(100% - 4px);
+		}
+	
+		.btn.primary:hover:before {
+			width: 0;
+			height: 0;
+		}
+	
+		.btn.tertiary {
+			border-color: transparent;
+			transition: border-color .2s;
+		}
+	
+		.btn.tertiary:hover {
+			border-color: #800080
 		}
 	</style>
 </head>
@@ -1111,12 +1176,16 @@
 					<p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
 
 					<form method="POST">
+            {% csrf_token %}
 						<div class="position-relative">
 							<div class="voice_to_text">
+
 								<textarea id="convert_text" class="form-control" name="cmd"
 									placeholder="Have a question? Just ask here or enter terms" style="box-shadow: none;
 								resize: none;height:70px;"></textarea>
-
+                <div class="button-search-main">
+									<button class="btn primary" type="submit">Search</button>
+								</div>
 								<!-- <input id="convert_text" name="cmd" class="form-control"
 								placeholder="Have a question? Just ask here or enter terms"><i
 								class="ti-search search-icon" ></i> -->
@@ -1127,6 +1196,7 @@
 							</div>
 						</div>
 					</form>
+
 					<!-- <div class="display-screen">
 						<div id="display"></div>
 					</div> -->
@@ -1284,34 +1354,7 @@
 			isDark = !isDark;
 		};
 	</script>
-  <script>
-    (function ($) {
-      'use strict';
 
-      // data background
-      $('[data-background]').each(function () {
-        $(this).css({
-          'background-image': 'url(' + $(this).data('background') + ')'
-        });
-      });
-
-      // collapse
-      $('.collapse').on('shown.bs.collapse', function () {
-        $(this).parent().find('.ti-plus').removeClass('ti-plus').addClass('ti-minus');
-      }).on('hidden.bs.collapse', function () {
-        $(this).parent().find('.ti-minus').removeClass('ti-minus').addClass('ti-plus');
-      });
-
-      // match height
-      $('.match-height').matchHeight({
-        byRow: true,
-        property: 'height',
-        target: null,
-        remove: false
-      });
-
-    })(jQuery);
-  </script>
 
   {%load static%}
 	<!-- ** JS Plugins Needed for the Project ** -->
