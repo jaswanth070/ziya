@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<title>Voice assistent</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- theme meta -->
+	<meta name="theme-name" content="dot" />
+
+	<!-- ** CSS Plugins Needed for the Project ** -->
+  {%load static%}
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+	<!-- themefy-icon -->
+	<link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
+	<!--Favicon-->
+	<link rel="icon" href="images/favicon.png" type="image/x-icon">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<!-- Main Stylesheet -->
+	<!-- <link href="assets/style.css" rel="stylesheet" media="screen" /> -->
+  <style>
+    :root {
+      --primary-color: #02007e;
+      --body-color: #000000;
+      --text-color: #636363;
+      --text-color-dark: #242738;
+      --white-color: #ffffff;
+      --light-color: #f8f9fa;
+      --font-family: Lato;
+    }
+  
+    body {
+      line-height: 1.5;
+      font-family: var(--font-family), sans-serif;
+      -webkit-font-smoothing: antialiased;
+      font-size: 17px;
+      color: var(--text-color);
+      /* background-color: var(--body-color); */
+      width:100%;
+  height:100vh;
+    }
+  
+    p {
+      color: var(--text-color);
+      font-size: 15px
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--text-color-dark);
+      font-family: var(--font-family), sans-serif;
+      font-weight: 700;
+      line-height: 1.2
+    }
+  
+    h1,
+    .h1 {
+      font-size: 45px
+    }
+  
+    h2,
+    .h2 {
+      font-size: 32px
+    }
+  
+    h3,
+    .h3 {
+      font-size: 26px
+    }
+  
+    h4,
+    .h4 {
+      font-size: 20px
+    }
+  
+    h5,
+    .h5 {
+      font-size: 18px
+    }
+  
+    h6,
+    .h6 {
+      font-size: 14px
+    }
+  
+    .btn {
+      font-size: 14px;
+      font-family: var(--font-family), sans-serif;
+      text-transform: uppercase;
+      padding: 16px 44px;
+      border-radius: 0;
+      font-weight: 600;
+      border: 0;
+      position: relative;
+      z-index: 1;
+      transition: .2s ease
+    }
+  
+    .btn:focus {
+      outline: 0;
+      box-shadow: none !important
+    }
+  
+    .btn:active {
+      box-shadow: none
+    }
+  
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--white-color)
+    }
+  
+    .btn-primary:active {
+      background: var(--primary-color)
+    }
+  
+    .btn-primary:hover {
+      background: var(--primary-color)
+    }
+  
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .show>.btn-primary.dropdown-toggle {
+      color: var(--white-color);
+      background-color: var(--primary-color);
+      border-color: var(--primary-color)
+    }
+  
+    .inline-button {
+      line-height: .8rem !important;
+      padding: 5px 8px !important;
+      pointer-events: none;
+      margin-top: -5px
+    }
+  
+    .overflow-hidden {
+      overflow: hidden !important
+    }
+  
+    ::-moz-selection {
+      background: var(--primary-color);
+      color: var(--white-color)
+    }
+  
+    ::selection {
+      background: var(--primary-color);
+      color: var(--white-color)
+    }
+  
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--white-color);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+  
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+      font-size: 15px
+    }
+  
+    ol {
+      padding-left: 20px;
+      font-size: 15px
+    }
+  
+    img {
+      vertical-align: middle;
+      border: 0
+    }
+  
+    a,
+    a:hover,
+    a:focus {
+      text-decoration: none;
+      color: var(--primary-color)
+    }
+  
+    a:hover,
+    a:focus {
+      color: var(--primary-color)
+    }
+  
+    a,
+    button,
+    select {
+      cursor: pointer;
+      transition: .2s ease
+    }
+  
+    a:focus,
+    button:focus,
+    select:focus {
+      outline: 0
+    }
+  
+    .slick-slide {
+      outline: 0
+    }
+  
+    .section {
+      /* padding-top: 80px; */
+      padding-bottom: 80px
+    }
+  
+    @media(max-width:768px) {
+      .section {
+        padding-top: 60px
+      }
+    }
+  
+    .section-sm {
+      padding-top: 60px;
+      padding-bottom: 60px
+    }
+  
+    @media(max-width:768px) {
+      .section-sm {
+        padding-top: 40px
+      }
+    }
+  
+    .section-title {
+      margin-bottom: 40px
+    }
+  
+    .bg-cover {
+      background-size: cover;
+      background-position: 50%;
+      background-repeat: no-repeat
+    }
+  
+    .border-primary {
+      border-color: #f2f2f2 !important
+    }
+  
+    pre {
+      padding: 20px
+    }
+  
+    .overlay {
+      position: relative
+    }
+  
+    .overlay::before {
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      /* background: var(--primary-color); */
+      background-image: url('https://i.pinimg.com/originals/55/0c/80/550c80a326b9d687b038b5f5f72b0724.jpg');
+      opacity: .8
+    }
+  
+    .outline-0 {
+      outline: 0 !important
+    }
+  
+    .d-unset {
+      display: unset !important
+    }
+  
+    .bg-primary {
+      background: var(--primary-color) !important
+    }
+  
+    .bg-white {
+      background-color: var(--white-color) !important
+    }
+  
+    .bg-light {
+      background-color: var(--light-color) !important
+    }
+  
+    .text-primary {
+      color: var(--primary-color) !important
+    }
+  
+    .text-color {
+      color: var(--text-color) !important
+    }
+  
+    .text-dark {
+      color: var(--text-color-dark) !important
+    }
+  
+    .text-white {
+      color: var(--white-color) !important
+    }
+  
+    .top-50 {
+      top: 50px
+    }
+  
+    .navbar {
+      padding: 0
+    }
+  
+    @media(max-width:768px) {
+      .navbar {
+        padding: 10px 0
+      }
+    }
+  
+    .navbar-brand img {
+      max-width: 100px;
+      margin-bottom: 0
+    }
+  
+    .navbar .nav-item .nav-link {
+      text-transform: uppercase;
+      padding: 10px 15px !important;
+      font-size: 15px
+    }
+  
+    .navbar .dropdown:hover .dropdown-menu {
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1)
+    }
+  
+    .navbar .dropdown-menu {
+      box-shadow: 0 3px 9px 0 rgba(0, 0, 0, .12);
+      padding: 15px 0;
+      border: 0;
+      top: 40px;
+      left: -35px;
+      border-radius: 0;
+      display: block;
+      visibility: hidden;
+      transition: .3s ease;
+      opacity: 0;
+      -webkit-transform: translateY(20px);
+      transform: translateY(20px);
+      background: var(--white-color)
+    }
+  
+    @media(max-width:768px) {
+      .navbar .dropdown-menu {
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-transform-origin: unset;
+        transform-origin: unset
+      }
+    }
+  
+    .navbar .dropdown-menu.view {
+      visibility: visible !important;
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-transform-origin: top;
+      transform-origin: top
+    }
+  
+    @media(max-width:768px) {
+      .navbar .dropdown-menu.view {
+        display: block
+      }
+    }
+  
+    .navbar .dropdown-menu.show {
+      visibility: hidden
+    }
+  
+    @media(max-width:768px) {
+      .navbar .dropdown-menu.show {
+        visibility: visible;
+        display: block
+      }
+    }
+  
+    .navbar .dropdown-item {
+      position: relative;
+      color: var(--text-color-dark);
+      transition: .2s ease;
+      font-family: var(--font-family), sans-serif
+    }
+  
+    @media(max-width:768px) {
+      .navbar .dropdown-item {
+        text-align: center
+      }
+    }
+  
+    .navbar .dropdown-item:hover {
+      color: var(--primary-color);
+      background: 0 0
+    }
+  
+    .lang-list {
+      background: var(--primary-color);
+      color: var(--white-color)
+    }
+  
+    .lang-list.dark {
+      color: var(--text-color-dark);
+      background: var(--white-color)
+    }
+  
+    .banner {
+      overflow: hidden
+    }
+  
+    .banner p {
+      font-size: 20px;
+      opacity: .8
+    }
+  
+    .banner .nav-link.text-dark {
+      color: var(--white-color) !important
+    }
+  
+    .banner .nav-link.text-dark:hover {
+      color: var(--white-color) !important
+    }
+  
+    .banner .navbar-brand {
+      color: var(--white-color) !important
+    }
+  
+    #project-icon {
+      float: left;
+      height: 32px;
+      width: 32px
+    }
+  
+    #project-description {
+      margin: 0;
+      padding: 0
+    }
+  
+    .ui-helper-hidden-accessible {
+      display: none
+    }
+  
+    .ui-menu {
+      background: var(--white-color);
+      padding: 5px 20px 20px;
+      right: 0 !important;
+      max-height: 200px;
+      overflow: hidden;
+      border-radius: 0 0 25px 25px;
+      z-index: 9999;
+      box-shadow: 0 13px 20px 0 rgba(0, 0, 0, .07)
+    }
+  
+    @media(max-width:575px) {
+      .ui-menu {
+        width: calc(100% - 30px) !important
+      }
+    }
+  
+    @media(min-width:576px) {
+      .ui-menu {
+        max-width: 510px !important
+      }
+    }
+  
+    @media(min-width:768px) {
+      .ui-menu {
+        max-width: 690px !important
+      }
+    }
+  
+    @media(min-width:992px) {
+      .ui-menu {
+        max-width: 610px !important
+      }
+    }
+  
+    @media(min-width:1200px) {
+      .ui-menu {
+        max-width: 730px !important
+      }
+    }
+  
+    .ui-menu-item a {
+      color: var(--text-color);
+      padding: 8px 0;
+      font-size: 15px
+    }
+  
+    .ui-menu-item a:hover {
+      color: var(--primary-color)
+    }
+  
+    .ui-menu-item:not(:last-child) {
+      border-bottom: 1px solid #e8e8e8
+    }
+  
+    .ui-menu-item * {
+      display: none
+    }
+  
+    .ui-menu-item .ui-corner-all {
+      display: block
+    }
+  
+    .form-control {
+      height: 50px;
+      border-radius: 25px;
+      border: 0;
+      padding: 0 20px
+    }
+  
+    .form-control:focus {
+      border: 0;
+      box-shadow: none !important
+    }
+  
+    textarea.form-control {
+      height: 150px;
+      padding: 20px
+    }
+  
+    .icon {
+      font-size: 40px
+    }
+  
+    .shadow {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .07) !important;
+      transition: .3s ease
+    }
+  
+    .shadow-bottom {
+      box-shadow: 0 1px 0 rgba(12, 13, 14, .1), 0 1px 6px rgba(59, 64, 69, .1)
+    }
+  
+    .shadow:hover,
+    .shadow:focus {
+      box-shadow: 0 14px 25px rgba(0, 0, 0, .1) !important
+    }
+  
+    .content * {
+      margin-bottom: 20px
+    }
+  
+    .content img {
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 15px;
+      display: block;
+      text-align: center
+    }
+  
+    .content ul {
+      padding-left: 0;
+      margin-bottom: 20px
+    }
+  
+    .content ul li {
+      padding-left: 20px;
+      position: relative
+    }
+  
+    .content ul li::before {
+      position: absolute;
+      content: '';
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      opacity: .3;
+      left: 0;
+      top: 8px
+    }
+  
+    .list-styled li {
+      padding-left: 20px;
+      position: relative
+    }
+  
+    .list-styled li::before {
+      position: absolute;
+      content: '';
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      opacity: .3;
+      left: 0;
+      top: 17px
+    }
+  
+    .post-meta {
+      color: var(--text-color);
+      font-style: italic;
+      font-size: 14px
+    }
+  
+    blockquote {
+      font-size: 20px !important;
+      color: var(--text-color-dark);
+      padding: 20px 40px;
+      border-left: 2px solid var(--primary-color);
+      margin: 40px 0;
+      font-weight: 700;
+      background: var(--light-color)
+    }
+  
+    blockquote p {
+      margin-bottom: 0 !important
+    }
+  
+    .pagination {
+      justify-content: space-between
+    }
+  
+    .pagination a {
+      color: var(--primary-color)
+    }
+  
+    .pagination i {
+      font-size: 15px;
+      line-height: 1.8
+    }
+  
+    #accordion i {
+      font-size: 14px;
+      line-height: 2
+    }
+  
+    /* table {
+    text-align: left;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6
+  }
+  
+  table td,
+  table th {
+    padding: .75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+    margin-bottom: 0
+  }
+  
+  thead {
+    background: #ececec;
+    margin-bottom: 0
+  }
+  
+  tbody {
+    background: #f8f8f8;
+    margin-bottom: 0
+  } */
+  
+    .notices {
+      margin: 2rem 0;
+      position: relative
+    }
+  
+    .notices p {
+      padding: 10px
+    }
+  
+    .notices p::before {
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      font-family: themify;
+      font-weight: 900;
+      content: "\e717";
+      left: 10px
+    }
+  
+    .notices.note p {
+      border-top: 30px solid #6ab0de;
+      background: #e7f2fa
+    }
+  
+    .notices.note p::after {
+      content: 'Note';
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      left: 2rem
+    }
+  
+    .notices.tip p {
+      border-top: 30px solid #78c578;
+      background: #e6f9e6
+    }
+  
+    .notices.tip p::after {
+      content: 'Tip';
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      left: 2rem
+    }
+  
+    .notices.info p {
+      border-top: 30px solid #f0b37e;
+      background: #fff2db
+    }
+  
+    .notices.info p::after {
+      content: 'Info';
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      left: 2rem
+    }
+  
+    .notices.warning p {
+      border-top: 30px solid #e06f6c;
+      background: #fae2e2
+    }
+  
+    .notices.warning p::after {
+      content: 'Warning';
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      left: 2rem
+    }
+  
+    .sidebar {
+      background-color: var(--white-color);
+      position: sticky;
+      top: 50px;
+      margin-bottom: 30px;
+      padding: 40px 10px 20px
+    }
+  
+    .sidelist {
+      display: block
+    }
+  
+    li.sidelist>a {
+      margin-left: 20px;
+      margin-bottom: 10px;
+      display: block;
+      font-size: 20px
+    }
+  
+    li.sidelist li a {
+      margin: 0
+    }
+  
+    .sidelist li.sidelist {
+      display: block
+    }
+  
+    .sidelist li.sidelist.active a {
+      color: var(--primary-color)
+    }
+  
+    .sidelist li.sidelist.active::before {
+      opacity: 1
+    }
+  
+    .page-list li a {
+      display: none
+    }
+  
+    .page-list li ul a {
+      display: block
+    }
+  
+    .sidelist li a {
+      color: var(--text-color-dark);
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 10px 0;
+      line-height: 1.4
+    }
+  
+    p:empty,
+    p a:empty {
+      display: none !important
+    }
+  
+    pre {
+      display: block;
+      padding: 9.5px;
+      margin: 10px 0
+    }
+  
+    code {
+      margin-bottom: 0 !important;
+      font-size: 100%
+    }
+  
+    .back-btn {
+      position: relative
+    }
+  
+    .back-btn::before {
+      position: absolute;
+      font-family: themify;
+      content: "\e6bc";
+      font-size: 25px;
+      height: 30px;
+      width: 40px;
+      background-color: var(--white-color);
+      color: inherit;
+      text-align: right;
+      z-index: 1;
+      left: -5px;
+      top: -5px
+    }
+  
+    .ui-autocomplete-input {
+      border-bottom: 1px solid #d4d4d4 !important
+    }
+  
+    .ui-autocomplete-input.active {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0
+    }
+  
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      font-size: 14px
+    }
+  
+    i {
+      transition: .2s ease
+    }
+  
+    a:hover i {
+      color: var(--primary-color)
+    }
+  
+    pre code::-webkit-scrollbar {
+      height: 5px
+    }
+  
+    pre code::-webkit-scrollbar-track {
+      background: #000
+    }
+  
+    pre code::-webkit-scrollbar-thumb {
+      background: #888
+    }
+  
+    .code-tabs {
+      border: 1px solid #dee2e6;
+      overflow: hidden;
+      margin: 20px 0
+    }
+  
+    .code-tabs .tab-content {
+      padding: 20px 15px;
+      margin-bottom: 0
+    }
+  
+    .code-tabs .tab-content .tab-pane {
+      margin-bottom: 0
+    }
+  
+    .code-tabs .nav-tabs {
+      margin-bottom: 0
+    }
+  
+    .code-tabs .nav-tabs .nav-item {
+      padding-left: 0;
+      border-right: 1px solid #dee2e6
+    }
+  
+    .code-tabs .nav-tabs .nav-item .nav-link {
+      text-decoration: none;
+      font-weight: 500;
+      border: 0;
+      margin-bottom: 0
+    }
+  
+    .code-tabs .nav-tabs .nav-item::before {
+      display: none
+    }
+  
+    .code-tabs .nav-tabs .nav-item.active {
+      background: var(--primary-color)
+    }
+  
+    .code-tabs .nav-tabs .nav-item.active .nav-link {
+      color: var(--white-color)
+    }
+  
+    .clc {
+      /* height: 100vh; */
+      width: 100vw;
+      display: grid;
+      place-items: center;
+    }
+  
+    .calculator {
+      /* position: relative; */
+      height: auto;
+      width: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px #000;
+    }
+  
+    .theme-toggler {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 1;
+    }
+  
+    .theme-toggler.active {
+      color: #333;
+    }
+  
+    .theme-toggler.active::before {
+      background-color: #fff;
+    }
+  
+    .theme-toggler::before {
+      content: '';
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #333;
+      z-index: -1;
+    }
+  
+    #display {
+      margin: 0 10px;
+      height: 150px;
+      width: auto;
+      max-width: 270px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      font-size: 30px;
+      margin-bottom: 20px;
+      overflow-x: scroll;
+    }
+  
+    #display::-webkit-scrollbar {
+      display: block;
+      height: 3px;
+    }
+  
+    button {
+      height: 60px;
+      width: 60px;
+      border: 0;
+      border-radius: 30px;
+      margin: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+  
+    button:hover {
+      transform: scale(1.1);
+    }
+  
+    button#equal {
+      height: 130px;
+    }
+  
+    /* light theme */
+  
+    .calculator {
+      margin-top: 5rem;
+      background-color: #fff;
+    }
+  
+    .calculator #display {
+      color: #0a1e23;
+    }
+  
+    .calculator button#clear {
+      background-color: #ffd5d8;
+      color: #fc4552;
+    }
+  
+    .calculator button.btn-number {
+      background-color: #c3eaff;
+      color: #000000;
+    }
+  
+    .calculator button.btn-operator {
+      background-color: #ffd0fb;
+      color: #f967f3;
+    }
+  
+    .calculator button.btn-equal {
+      background-color: #adf9e7;
+      color: #000;
+    }
+  
+    /* dark theme */
+  
+    .calculator.dark {
+      background-color: #071115;
+    }
+  
+    .calculator.dark #display {
+      color: #f8fafb;
+    }
+  
+    .calculator.dark button#clear {
+      background-color: #2d191e;
+      color: #bd3740;
+    }
+  
+    .calculator.dark button.btn-number {
+      background-color: #1b2f38;
+      color: #f8fafb;
+    }
+  
+    .calculator.dark button.btn-operator {
+      background-color: #2e1f39;
+      color: #aa00a4;
+    }
+  
+    .calculator.dark button.btn-equal {
+      background-color: #223323;
+      color: #ffffff;
+    }
+  </style>
+
+	<script type="text/javascript" src="https://speechly.github.io/browser-ui/v2/push-to-talk-button.js"></script>
+	<script type="text/javascript" src="https://speechly.github.io/browser-ui/v2/big-transcript.js"></script>
+	<!-- <link rel="stylesheet" href="https://speechly.github.io/browser-ui/v2/speechly-ui.css"> -->
+  
+  <style>
+    .PushToTalkContainer {
+      position: fixed;
+      box-sizing: border-box;
+      bottom: 0;
+      left: 30px;
+      right: 0;
+      max-height: 100vh;
+      padding: 0 0 3rem 0;
+      pointer-events: none;
+      /* 
+  			display: flex;
+  			flex-direction: row;
+  			justify-content: center;
+  			z-index: 50; */
+    }
+  
+    .BigTranscriptContainer {
+      position: fixed;
+      margin: 3rem 2rem 0 2rem;
+      z-index: 10;
+    }
+  </style>
+  <style>
+		.btn {
+			border: solid 2px #800080;
+			background-color: white;
+			color: #800080;
+			padding: 0 12px;
+			font-size: 1.2em;
+			height: 2.3em;
+			width: auto;
+			position: relative;
+			box-shadow: 5px 5px 0 #FFD166;
+			z-index: 2;
+			border-radius: 5px;
+		}
+	
+	
+		.btn:hover {
+			cursor: pointer;
+		}
+	
+		.btn:before {
+			content: '';
+			width: 0;
+			height: 0;
+			bottom: 0px;
+			right: 0px;
+			position: absolute;
+			z-index: -1;
+			background: #FFD166;
+			transition: width .3s, height .3s;
+			border-top-left-radius: 5px;
+		}
+	
+	
+		.btn:hover:before {
+			width: calc(100% - 3px);
+			height: calc(100% - 3px);
+		}
+	
+	
+		/***** Variations *******/
+	
+		.btn.primary:before {
+			width: calc(100% - 4px);
+			height: calc(100% - 4px);
+		}
+	
+		.btn.primary:hover:before {
+			width: 0;
+			height: 0;
+		}
+	
+		.btn.tertiary {
+			border-color: transparent;
+			transition: border-color .2s;
+		}
+	
+		.btn.tertiary:hover {
+			border-color: #800080
+		}
+    .link{
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgba(3, 27, 23, 0.72);
+  margin: 30px;
+  position: relative;
+  transition: transform .1s ease-in-out;
+
+}
+
+.link::before, .link::after{
+  content: "";
+  position: absolute;
+  background-color: rgba(33,255,214,0.72);
+  transition: transform .5s;
+}
+.link5{
+padding: 10px;
+}
+.link5::before,
+.link5::after{
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+  border-color: rgba(31, 7, 33, 0.72);
+  background-color: transparent;
+}
+.link5::before{
+  border-width: 1px 0;
+  transform: scaleX(0);
+}
+.link5::after{
+  border-width: 0 1px ;
+  transform: scaleY(0);
+}
+.link5:hover::before,
+.link5:hover::after{
+      transform: scale(1);
+}
+	</style>
+</head>
+
+<body>
+	<!-- header -->
+	<header class="banner overlay bg-cover"
+		data-background="https://i.pinimg.com/originals/55/0c/80/550c80a326b9d687b038b5f5f72b0724.jpg" >
+		<nav class="navbar navbar-expand-md navbar-dark">
+			<div class="container">
+				<!-- <a class="navbar-brand px-2" href="index.html">mani</a> -->
+				<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
+					aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse text-center" id="navigation">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/assistant">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="faq.html">Faq</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="contact.html">Contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="#">About</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- banner -->
+		<div class="container section">
+			<div class="row">
+				<div class="col-lg-8 text-center mx-auto">
+					<h1 class="text-white mb-3">TITLE</h1>
+					<p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
+
+					<form method="POST">
+            {% csrf_token %}
+						<div class="position-relative">
+							<div class="voice_to_text">
+
+								<textarea id="convert_text" class="form-control" name="cmd"
+									placeholder="Have a question? Just ask here or enter terms" style="box-shadow: none;
+								resize: none;height:70px;"></textarea>
+                <div class="button-search-main">
+									<button class="btn primary" type="submit" >Search</button>
+								</div>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show results</button>
+								<!-- <input id="convert_text" name="cmd" class="form-control"
+								placeholder="Have a question? Just ask here or enter terms"><i
+								class="ti-search search-icon" ></i> -->
+
+								<!-- <input id="search" class="form-control"
+									placeholder="Have a question? Just ask here or enter terms"><i
+									class="ti-search search-icon"></i>  -->
+							</div>
+						</div>
+					</form>
+
+					<!-- <div class="display-screen">
+						<div id="display"></div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<!-- /banner -->
+	</header>
+	<!-- /header -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{cmd}}</h4>
+      </div>
+      {% if link_sts %}
+      <div class="'modal-body text-center">
+          <p>Here what I found</p>
+          <a id="clickme"  class="link link5" href="{{res}}" target="_blank" >Here you Go!</a>
+         <!-- <button class="go"><span><a href="{{res}}" target="_blank">Here You Go!</a></span></button> -->
+      </div>
+      
+      {%else%}
+        <div class="modal-body">
+          <p>{{res}}</p>
+        </div>
+      {%endif%}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- /Modal -->
+	<!-- Mic -->
+		<!-- <button id="click_to_convert">Voice to text</button> -->
+		<div class="PushToTalkContainer" id="click_to_convert">
+			<push-to-talk-button appid="f2e6e9f3-0174-46c2-8723-abdf85fbeb3a" capturekey=" " />
+		</div>
+
+		<div class="BigTranscriptContainer">
+			<big-transcript></big-transcript>
+		</div>
+	<!-- </section> -->
+	<!-- /Mic -->
+
+
+	<!-- Calculator -->
+	<!-- <section  class="section"> -->
+		<div class="clc">
+			<div class="calculator dark">
+				<div class="theme-toggler active">
+					<i class="toggler-icon"></i>
+				</div>
+
+				<div class="display-screen">
+					<div id="display"></div>
+				</div>
+
+				<div class="buttons">
+					<table>
+						<tr>
+							<td><button class="btn-operator" id="clear">C</button></td>
+							<td><button class="btn-operator" id="/">&divide;</button></td>
+							<td><button class="btn-operator" id="*">&times;</button></td>
+							<td><button class="btn-operator" id="backspace">
+									<
+							</td>
+						</tr>
+						<tr>
+							<td><button class="btn-number" id="7">7</button></td>
+							<td><button class="btn-number" id="8">8</button></td>
+							<td><button class="btn-number" id="9">9</button></td>
+							<td><button class="btn-operator" id="-">-</button></td>
+						</tr>
+						<tr>
+							<td><button class="btn-number" id="4">4</button></td>
+							<td><button class="btn-number" id="5">5</button></td>
+							<td><button class="btn-number" id="6">6</button></td>
+							<td><button class="btn-operator" id="+">+</button></td>
+						</tr>
+						<tr>
+							<td><button class="btn-number" id="1">1</button></td>
+							<td><button class="btn-number" id="2">2</button></td>
+							<td><button class="btn-number" id="3">3</button></td>
+							<td rowspan="2"><button class="btn-equal" id="equal">=</button></td>
+						</tr>
+						<tr>
+							<td><button class="btn-operator" id="(">(</button></td>
+							<td><button class="btn-number" id="0">0</button></td>
+							<td><button class="btn-operator" id=")">)</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	<!-- /Calculator -->
+
+	<!-- call to action -->
+	<section>
+
+	</section>
+	<!-- /call to action -->
+
+	<!-- footer -->
+	<footer class="section pb-4">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-8 text-md-left text-center">
+				</div>
+				<div class="col-md-4 text-md-right text-center">
+					<ul class="list-inline">
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://www.instagram.com/jaswanth.m_/"><i
+									class="ti-instagram"></i></a></li>
+						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-twitter-alt"></i></a></li> -->
+						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://github.com/jaswanth070"><i
+									class="ti-github"></i></a>
+						</li>
+						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
+									class="ti-linkedin"></i></a></li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /footer -->
+
+	<script>
+		click_to_convert.addEventListener('click', function () {
+			var speech = true;
+			window.speechRecognition = window.webkitSpeechRecognition;
+			const recognition = new speechRecognition();
+			recognition.interimResults = true;
+
+			recognition.addEventListener('result', e => {
+				const transcript = Array.from(e.results)
+					.map(result => result[0])
+					.map(result => result.transcript)
+
+				convert_text.innerHTML = transcript;
+			})
+
+			if (speech == true) {
+				recognition.start();
+			}
+		})
+	</script>
+	<script>
+		const display = document.querySelector("#display");
+		// const display = document.querySelector("#convert_text");
+		const buttons = document.querySelectorAll("button");
+
+		buttons.forEach((item) => {
+			item.onclick = () => {
+				if (item.id == "clear") {
+					display.innerText = "";
+				} else if (item.id == "backspace") {
+					let string = display.innerText.toString();
+					display.innerText = string.substr(0, string.length - 1);
+				} else if (display.innerText != "" && item.id == "equal") {
+					display.innerText = eval(display.innerText);
+				} else if (display.innerText == "" && item.id == "equal") {
+					display.innerText = "Empty!";
+					setTimeout(() => (display.innerText = ""), 2000);
+				} else {
+					display.innerText += item.id;
+				}
+			};
+		});
+
+		const themeToggleBtn = document.querySelector(".theme-toggler");
+		const calculator = document.querySelector(".calculator");
+		const toggleIcon = document.querySelector(".toggler-icon");
+		let isDark = true;
+		themeToggleBtn.onclick = () => {
+			calculator.classList.toggle("dark");
+			themeToggleBtn.classList.toggle("active");
+			isDark = !isDark;
+		};
+	</script>
+  
+
+
+  {%load static%}
+	<!-- ** JS Plugins Needed for the Project ** -->
+	<!-- jquiry -->
+	<script src="{% static 'plugins/jquery/jquery-1.12.4.js' %}"></script>
+	<!-- Bootstrap JS -->
+	<script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+	<!-- match-height JS -->
+	<script src="{% static 'plugins/match-height/jquery.matchHeight-min.js' %}"></script>
+	<!-- Main Script -->
+	<!-- <script src="assets/script.js"></script> -->
+</body>
+
+</html>
