@@ -358,11 +358,11 @@ def assistant(request):
         if res is None:
             link_sts = 1
             res = google_search(cmd)
-            return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+            return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
         else:
-            return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+            return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
 
-    return render(request,'assistant.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+    return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
 
 def intrest_calc(request):
     return render(request,'intrest_calc.html')
