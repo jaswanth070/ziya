@@ -25,5 +25,6 @@ urlpatterns = [
     # path('testing',views.test,name='testing'),
     path('assistant',views.assistant,name='assistant'),
     path('assistant/intrest_calc',views.intrest_calc,name='assistant/intrest_calc'),
+    path('assistant/scientific_calc',views.scientific_calc,name='assistant/scientific_calc'),
     path('error505',views.error505,name='error505'),
 ]
