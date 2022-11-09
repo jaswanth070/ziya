@@ -372,6 +372,9 @@ def intrest_calc(request):
 def scientific_calc(request):
     return render(request,'scientific.html')
 
+def about(request):
+    return render(request,'about.html')
+
 def google_search(query):
     query = query.replace(' ','+')
     return (f"https://www.google.com/search?q={query}")
