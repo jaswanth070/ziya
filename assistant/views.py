@@ -356,6 +356,9 @@ def assistant(request):
         cmd = request.POST['cmd']
         res = evaluate(cmd)
         if res is None:
+            f = open('assistant\queries.json')
+            data = json.load(f)
+        elif res is None:
             link_sts = 1
             res = google_search(cmd)
             return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
