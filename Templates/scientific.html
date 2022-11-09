@@ -348,7 +348,7 @@ sub {
 <div class="calculator">
     <div class="input-area">
         <div id="topDisplay-container" >
-            <div id="topDisplay" class="convert_text"></div>
+            <div id="topDisplay" class="convert_text" name="que"></div>
         </div>
         <input type="text" id="display" readonly value="0">
         <div id="exponential-container">
@@ -426,6 +426,7 @@ sub {
 {%endblock content%}
 
 {%block script%}
+
 <script>
     const screen = document.getElementById('display');
 const topScreen = document.getElementById('topDisplay');
@@ -778,7 +779,7 @@ document.querySelectorAll('.button').forEach(button => {
         // }, 150)
     })
 })
-</script>
+</script> -->
 <script>
     click_to_convert.addEventListener('click', function () {
         var speech = true;
@@ -799,5 +800,7 @@ document.querySelectorAll('.button').forEach(button => {
             recognition.start();
         }
     })
+
 </script>
+
 {%endblock script%}

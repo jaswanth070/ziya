@@ -66,7 +66,17 @@ def evaluate(query):
         # webbrowser.open(f"www.google.com/search?q={query}")
         return (f"https://www.google.com/search?q={query}")
 
-
+    # Wikipedia
+    elif 'wikipedia' in query or 'Wikipedia about' in query :
+        link_sts = 0
+        # speak('Searching Wikipedia...')
+        query = query.replace("wikipedia about", "")
+        query = query.replace("wikipedia", "")
+        result = wikipedia.summary(query, sentences = 2)
+        # speak("According to Wikipedia")
+        # speak(result)
+        return (result)
+        # os.system('cls')
 # Pulihora
 # Time
     elif 'the time' in query:
@@ -76,9 +86,7 @@ def evaluate(query):
         return(strTime)
         # print('\n')
 
-    elif 'hi' in query or 'hai' in query or 'hello' in query:
-        link_sts = 0
-        return ("Hello Nice to meet you")
+    
 
     elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
         link_sts = 0
@@ -135,19 +143,6 @@ def evaluate(query):
         link_sts = 0
         return results
 
-# Search
-    elif 'search' in query or 'play' in query or "what's" in query or "what is" in query or "what are" in query:
-        query = query.replace("search for ", "")
-        query = query.replace("what's ", "")
-        query = query.replace("what is ", "")
-        query = query.replace("what are ", "")
-        query = query.replace("search ", "")
-        query = query.replace("google ", "")
-        query = query.replace("play ", "")
-        link_sts = 1
-        # webbrowser.open(f"www.google.com/search?q={query}")
-        return (f"https://www.google.com/search?q={query}")
-
 
 
     elif 'help me to' in query or 'find' in query:
@@ -159,17 +154,7 @@ def evaluate(query):
         # return "Here is what I found on Internet"
         return (f"https://www.google.com/search?q={query}")
 
-# Wikipedia
-    elif 'wikipedia' in query or 'Wikipedia about' in query :
-        link_sts = 0
-        # speak('Searching Wikipedia...')
-        query = query.replace("wikipedia about", "")
-        query = query.replace("wikipedia", "")
-        result = wikipedia.summary(query, sentences = 2)
-        # speak("According to Wikipedia")
-        # speak(result)
-        return (result)
-        # os.system('cls')
+
 # Google
     elif 'open google' in query or 'open Google' in query:
             # speak("Here you go to Google\n")
@@ -282,20 +267,20 @@ def evaluate(query):
         except:
             return None
 
-# Who
-    elif 'who' in query:
-        try:
-            link_sts = 0
-            app_id = "U946LA-262EX4V97V"
-            client = wolframalpha.Client(app_id)
-            indx = query.lower().split().index('who')
-            query = query.split()[indx + 1:]
-            res = client.query(' '.join(query))
-            answer = next(res.results).text
-            # speak("The answer is " + answer)
-            return answer
-        except:
-            return None
+# # Who
+#     elif 'who' in query:
+#         try:
+#             link_sts = 0
+#             app_id = "U946LA-262EX4V97V"
+#             client = wolframalpha.Client(app_id)
+#             indx = query.lower().split().index('who')
+#             query = query.split()[indx + 1:]
+#             res = client.query(' '.join(query))
+#             answer = next(res.results).text
+#             # speak("The answer is " + answer)
+#             return answer
+#         except:
+#             return None
 # Where
     elif 'where' in query:
         try:
@@ -336,6 +321,18 @@ def evaluate(query):
         except:
             return None
 
+# Search
+    elif 'search' in query or 'play' in query or "what's" in query or "what is" in query or "what are" in query:
+        query = query.replace("search for ", "")
+        query = query.replace("what's ", "")
+        query = query.replace("what is ", "")
+        query = query.replace("what are ", "")
+        query = query.replace("search ", "")
+        query = query.replace("google ", "")
+        query = query.replace("play ", "")
+        link_sts = 1
+        # webbrowser.open(f"www.google.com/search?q={query}")
+        return (f"https://www.google.com/search?q={query}")
 # Google search
     # elif 'google' in query:
     #     query = query.replace("google", "")
@@ -355,10 +352,12 @@ def assistant(request):
     if request.method == 'POST':
         cmd = request.POST['cmd']
         res = evaluate(cmd)
+        # if res is None:
+        #     f = open('assistant\queries.json')
+        #     # f = open('assistant\capital.json')
+        #     data = json.load(f)
+            
         if res is None:
-            f = open('assistant\queries.json')
-            data = json.load(f)
-        elif res is None:
             link_sts = 1
             res = google_search(cmd)
             return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})

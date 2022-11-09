@@ -1031,6 +1031,8 @@ padding: 10px;
 .link5:hover::after{
       transform: scale(1);
 }
+
+
 </style>
 
     {%block style%}
@@ -1082,7 +1084,7 @@ padding: 10px;
 					<h1 class="text-white mb-3">TITLE</h1>
 					<p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
 
-					<form method="POST">
+					<form method="POST" >
             {% csrf_token %}
 						<div class="position-relative">
 							<div class="voice_to_text">
@@ -1163,7 +1165,31 @@ padding: 10px;
     {%endblock content%}
 
 	
+    <div id="hamburger">
+      <div id="wrapper">
+        <span class="icon-bar" id="one"></span>
+        <span class="icon-bar" id="two"></span>
+        <span class="icon-bar" id="thr"></span>
+      </div>
+    </div>
+    <div class="nav" id="settings">
+      <i class="material-icons">settings</i>
+    </div>
+    <div class="nav" id="thumb">
+      <i class="material-icons">thumb_up</i>
+    </div>
+    <div class="nav" id="create">
+      <i class="material-icons">create</i>
+    </div>
+    <div class="nav" id="share">
+      <i class="material-icons">share</i>
+    </div>
 
+    <div class="backdrop"></div>
+<div class="fab child" data-subitem="1"><span>C</span></div>
+<div class="fab child" data-subitem="2"><span>B</span></div>
+<div class="fab child" data-subitem="3"><span>A</span></div>
+<div class="fab" id="masterfab"><span>+</span></div>
 	<!-- call to action -->
 	<section>
 
@@ -1214,6 +1240,12 @@ padding: 10px;
 				recognition.start();
 			}
 		})
+
+    // const show_res = document.getElementById('shw_res')
+
+    window.onload = function(){
+  document.getElementsByClassName('btn btn-info btn-lg')[0].click();
+  }
 	</script>
   
   {%block script%}

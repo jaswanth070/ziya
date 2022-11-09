@@ -1,10 +1,12 @@
 import json
+import csv
 
 
 f = open('assistant\queries.json')
 data = json.load(f)
 
 query = input()
+query = query.lower()
 
 try:
 # for i in data['who invented battery']:
