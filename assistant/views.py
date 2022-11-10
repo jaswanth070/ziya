@@ -375,6 +375,9 @@ def percentage_calc(request):
 def scientific_calc(request):
     return render(request,'scientific.html')
 
+def contactus(request):
+    return render(request,'contactus.html')
+
 def about(request):
     return render(request,'about.html')
 

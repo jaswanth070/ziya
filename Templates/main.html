@@ -1034,6 +1034,74 @@ padding: 10px;
 
 
 </style>
+<style>
+
+  footer{
+    position: fixed;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background-color: #333333;
+  }
+  .quote-container {
+    
+  border: 2px solid gold;
+  width: 40%;
+  margin: auto;
+  padding: 50px 0;
+  text-align: center;
+  font-size: 120%;
+  position: relative;
+  background-color: #fff;
+}
+.res-display{
+  display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 50%;
+}
+.r1 {
+  top: -10px;
+  left: -10px;
+  transform: rotate(-45deg);
+}
+.r2 {
+  top: -10px;
+  right: -10px;
+  transform: rotate(45deg);
+}
+.r3 {
+  bottom: -10px;
+  right: -10px;
+  transform: rotate(135deg);
+}
+.r4 {
+  bottom: -10px;
+  left: -10px;
+  transform: rotate(-135deg);
+}
+.rounded-border {
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  background-color: white;
+  z-index: 50;
+  border-bottom: 2px solid gold;
+  border-radius: 50%;
+}
+.title {
+  position: absolute;
+  top: -10px;
+  background-color: black;
+  left: 38%;
+  padding: 0 10px;
+  color: gold;
+}
+.quote {
+  color: #000;
+}
+
+</style>
 
     {%block style%}
     {%endblock style%}
@@ -1068,7 +1136,7 @@ padding: 10px;
 							<a class="nav-link text-dark" href="faq.html">Faq</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="contact.html">Contact</a>
+							<a class="nav-link text-dark" href="/contactus">Contact</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="/about">About</a>
@@ -1095,7 +1163,8 @@ padding: 10px;
                 <div class="button-search-main">
 									<button class="btn primary" type="submit" >Search</button>
 								</div>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show results</button>
+                <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show results</button> -->
+
 								<!-- <input id="convert_text" name="cmd" class="form-control"
 								placeholder="Have a question? Just ask here or enter terms"><i
 								class="ti-search search-icon" ></i> -->
@@ -1117,38 +1186,6 @@ padding: 10px;
 	</header>
 	<!-- /header -->
 
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{cmd}}</h4>
-      </div>
-      {% if link_sts %}
-      <div class="'modal-body text-center">
-          <p>Here what I found</p>
-          <a id="clickme"  class="link link5" href="{{res}}" target="_blank" >Here you Go!</a>
-         <!-- <button class="go"><span><a href="{{res}}" target="_blank">Here You Go!</a></span></button> -->
-      </div>
-      
-      {%else%}
-        <div class="modal-body">
-          <p>{{res}}</p>
-        </div>
-      {%endif%}
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-    
-  </div>
-</div>
-<!-- /Modal -->
-
 	<!-- Mic -->
 		<!-- <button id="click_to_convert">Voice to text</button> -->
 		<div class="PushToTalkContainer" id="click_to_convert">
@@ -1165,12 +1202,20 @@ padding: 10px;
     {%endblock content%}
 
 	<!-- call to action -->
-	<section>
-
+	<section class="res-display">
+    <div class="quote-container">
+      <div class="quote"> <em>" Good Art Inspires<br>Good Design Motivates. "<em></div>
+    
+      <div class="rounded-border r1"></div>
+      <div class="rounded-border r2"></div>
+      <div class="rounded-border r3"></div>
+      <div class="rounded-border r4"></div>
+      <div class="title">Oti Aicher</div>
+    </div>
 	</section>
 	<!-- /call to action -->
 
-	<!-- footer -->
+	<!-- fotter -->
 	<footer class="section pb-4">
 		<div class="container">
 			<div class="row align-items-center">
@@ -1178,11 +1223,12 @@ padding: 10px;
 				</div>
 				<div class="col-md-4 text-md-right text-center">
 					<ul class="list-inline">
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://www.instagram.com/jaswanth.m_/"><i
+						<li class="list-inline-item"><a class="text-color-light d-inline-block p-2" target='_blank' href="https://www.instagram.com/jaswanth.m_/"><i
 									class="ti-instagram"></i></a></li>
+                  <!-- <i class="fa fa-instagram" aria-hidden="true"></i> -->
 						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
 									class="ti-twitter-alt"></i></a></li> -->
-						<li class="list-inline-item"><a class="text-color d-inline-block p-2" target='_blank' href="https://github.com/jaswanth070"><i
+						<li class="list-inline-item"><a class="text-color-light d-inline-block p-2" target='_blank' href="https://github.com/jaswanth070"><i
 									class="ti-github"></i></a>
 						</li>
 						<!-- <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i
@@ -1192,7 +1238,7 @@ padding: 10px;
 			</div>
 		</div>
 	</footer>
-	<!-- /footer -->
+	<!-- /fotter -->
 
 	<script>
 		click_to_convert.addEventListener('click', function () {
