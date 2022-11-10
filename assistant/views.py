@@ -369,6 +369,9 @@ def assistant(request):
 def intrest_calc(request):
     return render(request,'intrest_calc.html')
 
+def percentage_calc(request):
+    return render(request,'percentage_calc.html')
+
 def scientific_calc(request):
     return render(request,'scientific.html')
 

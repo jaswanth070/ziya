@@ -27,5 +27,6 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('intrest_calc/',views.intrest_calc,name='intrest_calc'),
     path('scientific_calc/',views.scientific_calc,name='scientific_calc'),
+    path('percentage_calc/',views.percentage_calc,name='percentage_calc'),
     path('error505/',views.error505,name='error505'),
 ]
