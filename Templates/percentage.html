@@ -46,6 +46,7 @@ h1 {
 
 .container {
 	width: 480px;
+  border-radius: 6px;
 	background-color: #071115;
 	margin: 12px 0;
 	padding: 24px;
@@ -53,15 +54,16 @@ h1 {
 	box-shadow: 2px 2px 8px 2px #071115;
 }
 
-input[type=number] {
+.num {
 	width: 84px;
 	font-size: 18px;
 	padding: 8px;
 	margin: 0px 8px 8px 8px;
-    border: 2px solid#321c31;
+    border: 2px ;
     border-radius: 90px;
-    background-color: #2e1f39;
-    color: #aa00a4;
+    background-color: #181a27;
+    font-weight: bolder;
+    color: #fff;
 }
 
 /* The text-transform:uppercase property
@@ -69,7 +71,7 @@ causes characters to be raised to uppercase.
 The button's font-weight, font-size, and
 cursor type can be customised by the user. */
 button {
-    background-color: #223323;
+    background-color:#5029bc;
     color: #ffffff;
 	text-transform: uppercase;
 	font-weight: 900;
@@ -90,10 +92,11 @@ input[type=text] {
 	padding: 8px 0;
 	font-weight: 900;
 	text-align: center;
-	border: 2px solid #241317;
+	border: 2px ;
 	border-radius: 6px;
-    background-color: #2d191e;
-    color: #bd3740;
+    background-color: #181a27;
+    color: #fff;
+    font-weight: bolder;
 }
     </style>
     <style>
@@ -234,8 +237,8 @@ input[type=text] {
 	<div class="container">
 
 		<!-- Defines a field for entering a number-->
-		<h2> What is <input type="number" id="percent" />% of
-			<input type="number" id="num" />?
+		<h2> What is <input type="text" id="percent"class="num" />% of
+			<input type="text" id="num"class="num" />?
 		</h2>
 
 		<!-- onclick event is to call the function when
@@ -249,9 +252,9 @@ input[type=text] {
 
 	<div class="container">
 		<!-- Defines a field for entering a number -->
-		<h2><input type="number" id="num1" />
+		<h2><input type="text" id="num1" class="num" />
 			is what Percent of
-			<input type="number" id="num2" />?
+			<input type="text" id="num2" class="num"/>?
 		</h2>
 		
 		<!-- onclick event is to call the function

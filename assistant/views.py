@@ -36,8 +36,10 @@ def home(request):
 #     return render(request,'base.html',{'cmd':cmd,'res':res,'link_sts':link_sts})
 
 def evaluate(query):
-    query.lower()
     global link_sts
+    
+    query.lower()
+
 
 # On youtube
     if(('in YouTube' in query or 'on YouTube' in query) and 'search' in query):
@@ -100,9 +102,9 @@ def evaluate(query):
             link_sts = 0
             return ("I'm not sure about, may be you should give me some time")
     
-    elif "i love you" in query:
+    elif "i love you" in query or "I love you" in query:
         link_sts = 0
-        return("Sorry I have a Boyfriend")
+        return("Sorry I have a patner")
 
     elif "what's your name" in query or "What is your name" in query:
             link_sts = 0
@@ -347,8 +349,8 @@ def evaluate(query):
 def assistant(request):
     global link_sts
     link_sts = 0
-    res = 'Give the command'
-    cmd = 'Give the command'
+    res = "I'm your voice assistant! How may I help you"
+    cmd = 'Welcome!!'
     if request.method == 'POST':
         cmd = request.POST['cmd']
         res = evaluate(cmd)
