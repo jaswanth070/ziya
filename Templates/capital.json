@@ -234,6 +234,7 @@
 {"country":"United Arab Emirates","capital":"Abu Dhabi","type":"countryCapital"},
 {"country":"United Kingdom; England","capital":"London","type":"countryCapital"},
 {"country":"United States","capital":"Washington, D.C.","type":"countryCapital"},
+{"country":"United States America","capital":"Washington, D.C.","type":"countryCapital"},
 {"country":"United States Virgin Islands","capital":"Charlotte Amalie","type":"countryCapital"},
 {"country":"Uruguay","capital":"Montevideo","type":"countryCapital"},
 {"country":"Uzbekistan","capital":"Tashkent","type":"countryCapital"},

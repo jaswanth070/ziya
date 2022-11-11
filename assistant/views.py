@@ -51,7 +51,7 @@ def evaluate(query):
         return ("https://www.youtube.com")
     
     elif 'capital' in query:
-        query = query.replace('capital of ')
+        query = query.replace('capital of ',"")
         b = open("Templates/capital.json")
         data = json.load(b)
         query = query.lower()
@@ -87,10 +87,16 @@ def evaluate(query):
         # speak(f"Sir, the time is {strTime}")
         return(strTime)
         # print('\n')
-
+    elif "what am i thinking" in query or "what am I thinking" in query or "what I am thinking" in query:
+                link_sts = 0
+                return("You're thinking that if this Assistant guesses what I'm thinking, I'm going to freak out.")
     elif 'hai' in query or 'hi' in query or 'hello' in query:
         link_sts = 0
         return("Hello !")
+
+    elif "how old are you" in query or "what is your age" in query:
+        link_sts = 0
+        return ("just few days, so I am still fairly young")
 
     elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
         link_sts = 0
@@ -168,7 +174,7 @@ def evaluate(query):
         # return "Here is what I found on Internet"
         return (f"https://www.google.com/search?q={query}")
 
-
+    
 # Google
     elif 'open google' in query or 'open Google' in query:
             # speak("Here you go to Google\n")
@@ -374,10 +380,9 @@ def assistant(request):
              link_sts = 0
              return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':"Give a command"})
 
-        # res = evaluate(cmd)
-        res = json_search(cmd)
+        res = evaluate(cmd)
         if res is None:
-            res = evaluate(cmd)
+            res = json_search(cmd)
             if res is None:
                 link_sts = 1
                 res = google_search(cmd)
