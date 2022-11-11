@@ -52,7 +52,7 @@ def evaluate(query):
     
     elif 'capital' in query:
         query = query.replace('capital of ')
-        b = open("{%static 'captial.json' %}")
+        b = open("Templates/capital.json")
         data = json.load(b)
         query = query.lower()
         for i in data:
@@ -118,7 +118,7 @@ def evaluate(query):
 
     elif 'fine' in query or "good" in query:
             link_sts = 0
-            return("It's good to know that y1our fine")
+            return("It's good to know that your fine")
 
     elif 'where are you' in query or "what's your location" in query or "location" in query or "your home" in query or "where is your home" in query:
             link_sts = 0
@@ -407,7 +407,7 @@ def google_search(query):
     return (f"https://www.google.com/search?q={query}")
 
 def json_search(query):
-    a = open("{%static 'queries.json' %}")
+    a = open('Templates/queries.json')
     data_a = json.load(a)
     try:
         res = data_a.keys()
