@@ -52,7 +52,7 @@ def evaluate(query):
     
     elif 'capital' in query:
         query = query.replace('capital of ')
-        b = open('assistant\capital.json')
+        b = open("{%static 'captial.json' %}")
         data = json.load(b)
         query = query.lower()
         for i in data:
@@ -407,7 +407,7 @@ def google_search(query):
     return (f"https://www.google.com/search?q={query}")
 
 def json_search(query):
-    a = open('assistant\queries.json')
+    a = open("{%static 'queries.json' %}")
     data_a = json.load(a)
     try:
         res = data_a.keys()
