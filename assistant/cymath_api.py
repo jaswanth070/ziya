@@ -96,5 +96,5 @@ def GCF(query):
         return None
 
 # que = input()
-# res = GCF(que)
+# res = slove('x^3-2x^2-x+2')
 # print(res)

@@ -26,15 +26,6 @@ link_sts = 0
 def home(request):
     return HttpResponse('This is the main page!')
 
-
-# def assistant(request):
-#     cmd = 'Give the command'
-#     res = ''
-#     if request.method == 'POST':
-#         cmd = request.POST['cmd']
-#         res = evaluate(cmd)
-#     return render(request,'base.html',{'cmd':cmd,'res':res,'link_sts':link_sts})
-
 def evaluate(query):
     global link_sts
     
@@ -58,8 +49,17 @@ def evaluate(query):
         link_sts = 1
         # webbrowser.open("https://www.youtube.com")
         return ("https://www.youtube.com")
+    
+    elif 'capital' in query:
+        query = query.replace('capital of ')
+        b = open('assistant\capital.json')
+        data = json.load(b)
+        query = query.lower()
+        for i in data:
+            if query == i['country'].lower():
+                return(i['capital'])
 
-    # Definr
+    # Define
     elif 'define' in query or 'definition of' in query :
         query = query.replace("defintion of ", "")
         query = query.replace("define ", "")
@@ -88,7 +88,9 @@ def evaluate(query):
         return(strTime)
         # print('\n')
 
-    
+    elif 'hai' in query or 'hi' in query or 'hello' in query:
+        link_sts = 0
+        return("Hello !")
 
     elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
         link_sts = 0
@@ -102,21 +104,30 @@ def evaluate(query):
             link_sts = 0
             return ("I'm not sure about, may be you should give me some time")
     
-    elif "i love you" in query or "I love you" in query:
+    elif "i love you" in query.lower() or "I love you" in query:
         link_sts = 0
         return("Sorry I have a patner")
 
-    elif "what's your name" in query or "What is your name" in query:
+    elif "what's your name" in query or "What is your name" in query or 'your name' in query or 'name' in query:
             link_sts = 0
-            return "Ny friends call me Giya"
+            return "My friends call me Giya"
 
     elif 'how are you' in query:
             link_sts = 0
-            return ("I am fine, Thank you! How are you, Sir")
+            return ("I am fine, Thank you! How are you")
 
     elif 'fine' in query or "good" in query:
             link_sts = 0
-            return("It's good to know that your fine")
+            return("It's good to know that y1our fine")
+
+    elif 'where are you' in query or "what's your location" in query or "location" in query or "your home" in query or "where is your home" in query:
+            link_sts = 0
+            return("It's a secrete")
+    elif 'favourites' in query or 'favourite' in query:
+            link_sts = 0
+            return("It's personal")
+    elif 'are you a virgin' in query:
+            return("Yes!")
 # News
     elif "news" in query:
         # BBC news api
@@ -149,6 +160,7 @@ def evaluate(query):
 
     elif 'help me to' in query or 'find' in query:
         query = query.replace("help me to ", "")
+        query = query.replace("find for ", "")
         query = query.replace("find ", "")
         query = query.replace(" ", "+")
         link_sts = 1
@@ -186,16 +198,18 @@ def evaluate(query):
         # os.system('cls')
 
 # Simplify
-    elif 'simplify' in query:
+    elif 'simplify' in query or 'calculate' in query:
         link_sts = 0
+        query = query.replace("is equal to ", "=")
         query = query.replace("simplify ", "")
+        query = query.replace("calculate ", "")
         query = query.replace("power ", "^")
         query = query.replace("square ", "^2")
         query = query.replace("into ", "*")
         query = query.replace("plus ", "+")
         query = query.replace("minus ", "-")
         query = query.replace("by ", "/")
-        query = query.replace("is equal to ", "=")
+        query = query.replace("is equals to ", "=")
 
         res =  slove(query)
 
@@ -206,7 +220,9 @@ def evaluate(query):
             query = query.replace(" ", "")
             res = mat.sympify(query)
             if not res is None:
-                return res.subs(query[0],2)
+                link_sts = 1
+                res = google_search(temp)
+                # return res.subs(query[0],2)
             else:
                 link_sts = 1
                 res = google_search(temp)
@@ -216,7 +232,7 @@ def evaluate(query):
 # Factorize
     elif 'factorize' in query:
         link_sts = 0
-        query = query.replace("simplify ", "")
+        query = query.replace("factorize ", "")
         query = query.replace("power ", "^")
         query = query.replace("square ", "^2")
         query = query.replace("into ", "*")
@@ -353,18 +369,21 @@ def assistant(request):
     cmd = 'Welcome!!'
     if request.method == 'POST':
         cmd = request.POST['cmd']
-        res = evaluate(cmd)
-        # if res is None:
-        #     f = open('assistant\queries.json')
-        #     # f = open('assistant\capital.json')
-        #     data = json.load(f)
-            
+        if cmd == "":
+             res= ("Sorry! Give me a command")
+             link_sts = 0
+             return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':"Give a command"})
+
+        # res = evaluate(cmd)
+        res = json_search(cmd)
         if res is None:
-            link_sts = 1
-            res = google_search(cmd)
-            return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
-        else:
-            return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+            res = evaluate(cmd)
+            if res is None:
+                link_sts = 1
+                res = google_search(cmd)
+                return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
+            else:
+                return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
 
     return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':cmd})
 
@@ -386,6 +405,20 @@ def about(request):
 def google_search(query):
     query = query.replace(' ','+')
     return (f"https://www.google.com/search?q={query}")
+
+def json_search(query):
+    a = open('assistant\queries.json')
+    data_a = json.load(a)
+    try:
+        res = data_a.keys()
+        # print(res)
+        query=query.lower()
+        for i in res:
+            if query in i.lower():
+                return (data_a[i])
+    except:
+        return False
+
 
 def error505(request):
     return render(request,'500error.html')

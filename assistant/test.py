@@ -2,24 +2,23 @@ import json
 import csv
 
 
-f = open('assistant\queries.json')
-data = json.load(f)
+def json_search(query):
+    a = open('assistant\queries.json')
+    b = open('assistant\capital.json')
+    data_a = json.load(a)
+    # data_a = json.load(b)
+    try:
+        res = data_a.keys()
+        # print(res)
 
-query = input()
-query = query.lower()
+        for i in res:
+            if query in i:
+                return (data_a[i])
+            # print(i)
+        # print(data)
+        a.close()
+    except:
+        return False
 
-try:
-# for i in data['who invented battery']:
-#     print(i)
-    res = data.keys()
-    # print(res)
+print(json_search('introvert'))
 
-    for i in res:
-        if query in i:
-            print(data[i])
-            break
-        # print(i)
-    # print(data)
-    f.close()
-except:
-    print("No results found")
