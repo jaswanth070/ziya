@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('assistant.urls')),
 ]
+handler404 = 'assistant.views.error505'
+handler505 = 'assistant.views.error505'

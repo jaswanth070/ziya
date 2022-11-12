@@ -31,3 +31,4 @@ urlpatterns = [
     path('contactus/',views.contactus,name='contactus'),
     path('error505/',views.error505,name='error505'),
 ]
+
