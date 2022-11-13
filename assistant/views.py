@@ -91,7 +91,7 @@ def evaluate(query):
                 link_sts = 0
                 return("You're thinking that if this Assistant guesses what I'm thinking, I'm going to freak out.")
 
-    elif 'hai' in query or 'hi' in query or 'hello' in query:
+    elif 'hai' in query or 'hi' in query or 'hello' in query or 'Hai' in query or 'Hi' in query or 'Hello' in query:
         link_sts = 0
         return("Hello !")
 
