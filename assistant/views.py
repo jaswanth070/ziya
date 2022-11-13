@@ -120,7 +120,7 @@ def evaluate(query,request):
             link_sts = 0
             return "My friends call me Giya"
 
-    elif 'how are you' in query:
+    elif 'how are you' in query.lower():
             link_sts = 0
             return ("I am fine, Thank you! How are you")
 
