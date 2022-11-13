@@ -1,5 +1,6 @@
 
 from django.shortcuts import render,HttpResponse,redirect
+from django.template import RequestContext
 import datetime
 import operator
 import os
@@ -120,13 +121,18 @@ def evaluate(query,request):
             link_sts = 0
             return "My friends call me Giya"
 
-    elif 'how are you' in query.lower():
+    elif 'how are you' in query or 'How are you' in query:
             link_sts = 0
             return ("I am fine, Thank you! How are you")
 
+    elif 'not fine' in query or "not good" in query:
+            link_sts = 0
+            return("Oops!")
+            
     elif 'fine' in query or "good" in query:
             link_sts = 0
             return("It's good to know that your fine")
+
 
     elif 'where are you' in query or "what's your location" in query or "location" in query or "your home" in query or "where is your home" in query:
             link_sts = 0
@@ -428,5 +434,6 @@ def json_search(query):
         return False
 
 
-def error505(request):
-    return render(request,'500error.html')
+def error505(request, exception):
+    # response.status_code = 404
+    return render("500error.html")
