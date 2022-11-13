@@ -72,8 +72,8 @@ def evaluate(query):
     elif 'wikipedia' in query or 'Wikipedia about' in query :
         link_sts = 0
         # speak('Searching Wikipedia...')
-        query = query.replace("wikipedia about", "")
-        query = query.replace("wikipedia", "")
+        query = query.replace("wikipedia about ", "")
+        query = query.replace("wikipedia ", "")
         result = wikipedia.summary(query, sentences = 2)
         # speak("According to Wikipedia")
         # speak(result)
@@ -90,6 +90,7 @@ def evaluate(query):
     elif "what am i thinking" in query or "what am I thinking" in query or "what I am thinking" in query:
                 link_sts = 0
                 return("You're thinking that if this Assistant guesses what I'm thinking, I'm going to freak out.")
+
     elif 'hai' in query or 'hi' in query or 'hello' in query:
         link_sts = 0
         return("Hello !")
@@ -427,6 +428,3 @@ def json_search(query):
 
 def error505(request):
     return render(request,'500error.html')
-        
-
-
