@@ -23,10 +23,7 @@ from urllib.request import urlopen
 from .cymath_api import slove
 link_sts = 0
 
-def home(request):
-    return HttpResponse('This is the main page!')
-
-def evaluate(query):
+def evaluate(query,request):
     global link_sts
     
     query.lower()
@@ -99,13 +96,17 @@ def evaluate(query):
         link_sts = 0
         return ("just few days, so I am still fairly young")
 
-    elif 'who are you' in query or 'what are you' in query or 'say something about you' in query:
+    elif 'who are you' in query or 'what are you' in query or 'say something about you' in query or 'about you' in query:
         link_sts = 0
-        return("I am your personal voice assistant Ziya")
+        return("I am your voice assistant Ziya")
 
     elif "why you came to world" in query or "how you came to world" in query or "why you came to this world" in query or "how you came to this world" in query:
             link_sts = 0
             return ("Thanks to Jaswanth and his team. further It's a secret")
+
+    elif 'who created you' in query:
+            link_sts = 0
+            return ("Thanks to Jaswanth and his team. Further It's a secret")
 
     elif "will you be my girl friend" in query:
             link_sts = 0
@@ -129,10 +130,12 @@ def evaluate(query):
 
     elif 'where are you' in query or "what's your location" in query or "location" in query or "your home" in query or "where is your home" in query:
             link_sts = 0
-            return("It's a secrete")
+            return("It's a secret")
+
     elif 'favourites' in query or 'favourite' in query:
             link_sts = 0
             return("It's personal")
+
     elif 'are you a virgin' in query:
             return("Yes!")
 # News
@@ -174,7 +177,6 @@ def evaluate(query):
         # webbrowser.open(f"www.google.com/search?q={query}")
         # return "Here is what I found on Internet"
         return (f"https://www.google.com/search?q={query}")
-
     
 # Google
     elif 'open google' in query or 'open Google' in query:
@@ -381,7 +383,7 @@ def assistant(request):
              link_sts = 0
              return render(request,'maths_calc.html',{'res':res,'link_sts':link_sts,'cmd':"Give a command"})
 
-        res = evaluate(cmd)
+        res = evaluate(cmd,request)
         if res is None:
             res = json_search(cmd)
             if res is None:
