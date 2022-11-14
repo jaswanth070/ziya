@@ -9,7 +9,7 @@
     --button-color: #2a2a2a;
     --button-hover: #3d3d3d;
     --max-width: 15rem;
-    font-size: 16px;
+    font-size: 12px;
 } 
 body {
     display: flex;
@@ -91,6 +91,7 @@ body {
     flex-grow: 1;
     /* margin: auto; */
     margin-top: 50px;
+    margin-bottom: 50px;
     height: auto;
     width: auto;
     padding: 20px;
@@ -328,7 +329,7 @@ sub {
 
 @media screen and (min-width: 1200px) {
     :root {
-        font-size: 22px;
+        font-size: 16px;
     }
 }
 
@@ -756,6 +757,7 @@ powerBut.addEventListener('click', event => {
     showOnScreen.push(event.target.dataset.buttonSymbol);
     updateScreen();
 });
+
 function powerFunction() {
     if (calculation.includes('power(')) {
         let powerStart, powerEnd; // keep the index of the number from where to start power function
@@ -935,7 +937,7 @@ document.querySelectorAll('.button').forEach(button => {
         // }, 150)
     })
 })
-</script> -->
+</script> 
 <script>
     click_to_convert.addEventListener('click', function () {
         var speech = true;
