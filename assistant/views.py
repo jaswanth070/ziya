@@ -89,15 +89,15 @@ def evaluate(query,request):
                 link_sts = 0
                 return("You're thinking that if this Assistant guesses what I'm thinking, I'm going to freak out.")
 
-    elif 'hai' in query or 'hi' in query or 'hello' in query or 'Hai' in query or 'Hi' in query or 'Hello' in query:
+    elif 'hai' in query or 'hi' == query or 'hello' in query or 'Hai' == query or 'Hi' == query or 'Hello' == query:
         link_sts = 0
         return("Hello !")
 
-    elif "how old are you" in query or "what is your age" in query:
+    elif "how old are you" in query or "what is your age" in query or "what's your age" in query:
         link_sts = 0
         return ("just few days, so I am still fairly young")
 
-    elif 'who are you' in query or 'what are you' in query or 'say something about you' in query or 'about you' in query:
+    elif 'who are you' in query or 'what are you' in query or 'say something about you' in query or 'thing about you' in query or 'about you' in query:
         link_sts = 0
         return("I am your voice assistant Ziya")
 
