@@ -308,7 +308,8 @@
     }
   
     .text-white {
-      color: var(--white-color) !important
+      /* color: var(--white-color) !important */
+      color: tan !important
     }
   
     .top-50 {
@@ -316,6 +317,7 @@
     }
   
     .navbar {
+      font-family: 'Courier New', Courier, monospace;
       padding: 0
     }
   
@@ -331,6 +333,7 @@
     }
   
     .navbar .nav-item .nav-link {
+      color: #02007e;
       text-transform: uppercase;
       padding: 10px 15px !important;
       font-size: 15px
@@ -435,7 +438,9 @@
     }
   
     .banner .nav-link.text-dark {
-      color: var(--white-color) !important
+      /* color: var(--white-color) !important */
+      /* color:sandybrown !important */
+      color:goldenrod !important
     }
   
     .banner .nav-link.text-dark:hover {
@@ -1150,9 +1155,21 @@ padding: 10px;
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="/assistant">Home</a>
 						</li>
-						<!-- <li class="nav-item">
-							<a class="nav-link text-dark" href="faq.html">Faq</a>
-						</li> -->
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/scientific_calc">Scientific Calculator</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/units_calc">Units Converter</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/intrest_calc">Intrest Calculator</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/currency_calc">Currency Converter</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="/percentage_calc">Percentage Calculator</a>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="/contactus">Contact</a>
 						</li>
@@ -1167,8 +1184,8 @@ padding: 10px;
 		<div class="container section">
 			<div class="row">
 				<div class="col-lg-8 text-center mx-auto">
-					<h1 class="text-white mb-3">Voice Assistant</h1>
-					<p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
+					<h1 class="text mb-3" style="color: goldenrod;">Voice Assistant</h1>
+					<!-- <p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p> -->
 
 					<form method="POST" >
             {% csrf_token %}
