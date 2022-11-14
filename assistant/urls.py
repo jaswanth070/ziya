@@ -28,6 +28,8 @@ urlpatterns = [
     path('intrest_calc/',views.intrest_calc,name='intrest_calc'),
     path('scientific_calc/',views.scientific_calc,name='scientific_calc'),
     path('percentage_calc/',views.percentage_calc,name='percentage_calc'),
+    path('currency_calc/',views.currency_calc,name='currency_calc'),
+    path('units_calc/',views.units_calc,name='units_calc'),
     path('contactus/',views.contactus,name='contactus'),
     path('error505/',views.error505,name='error505'),
 ]

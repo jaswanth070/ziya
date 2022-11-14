@@ -407,6 +407,12 @@ def intrest_calc(request):
 def percentage_calc(request):
     return render(request,'percentage.html')
 
+def currency_calc(request):
+    return render(request,'currency.html')
+
+def units_calc(request):
+    return render(request,'units.html')
+
 def scientific_calc(request):
     return render(request,'scientific.html')
 

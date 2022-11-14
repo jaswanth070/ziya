@@ -45,6 +45,7 @@ body {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+
 .topBar {
     display: flex;
     justify-content: space-between;
@@ -468,6 +469,14 @@ sub {
   left: 0;
   bottom: -1rem;
 }
+.fab-wheel .fab-action-5 {
+  left: 0;
+  bottom: -1rem;
+}
+.fab-wheel .fab-action-6 {
+  left: 126px;
+  bottom: -4rem;
+}
 </style>
 {%endblock style%}
 
@@ -477,6 +486,7 @@ sub {
 
 
 {%block content%}
+
 
 <!-- Calculator -->
 <div class="calculator">
@@ -566,17 +576,24 @@ sub {
     <div class="fab-wheel">
       <a href="/" class="fab-action fab-action-1">
         <i class="fa fa-home"></i>
-        
       </a>
-      <a href="/scientific_calc" class="fab-action fab-action-2">
+
+      <!-- <a href="/scientific_calc" class="fab-action fab-action-2">
         <i class="fa fa-calculator"></i>
+      </a> -->
+      <a href="/units_calc" class="fab-action fab-action-2">
+        <i class="fa fa-cogs"></i>
       </a>
-          <a href="/intrest_calc" class="fab-action fab-action-3">
+      
+      <a href="/intrest_calc" class="fab-action fab-action-3">
         <i class="fa fa-inr"></i>
       </a>
+
       <a href="/percentage_calc" class="fab-action fab-action-4">
         <i class="fa fa-percent"></i>
       </a>
+      
+      
     </div>
   </div>
 	<!-- /Calculator -->
