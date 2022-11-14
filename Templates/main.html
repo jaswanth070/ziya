@@ -21,6 +21,8 @@
 	<link rel="icon" href="images/favicon.png" type="image/x-icon">
 	<!-- fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<!-- Main Stylesheet -->
 	<!-- <link href="assets/style.css" rel="stylesheet" media="screen" /> -->
 
@@ -1036,6 +1038,7 @@ padding: 10px;
 
 
 </style>
+
 <style>
 
   footer{
@@ -1138,7 +1141,8 @@ padding: 10px;
 				<!-- <a class="navbar-brand px-2" href="index.html">mani</a> -->
 				<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
 					aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<!-- <span class="navbar-toggler-icon custom-toggler"></span> -->
+          <i class="fa fa-bars dark" aria-hidden="true"></i>
 				</button>
 
 				<div class="collapse navbar-collapse text-center" id="navigation">
@@ -1146,9 +1150,9 @@ padding: 10px;
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="/assistant">Home</a>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a class="nav-link text-dark" href="faq.html">Faq</a>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="/contactus">Contact</a>
 						</li>
@@ -1225,7 +1229,7 @@ padding: 10px;
 
 	</section>
 	<!-- /call to action -->
-  <button id="click_to_convert"  style="display: flex;position: absolute; justify-content: center;align-items:center;border-radius: 50%;left: 0;bottom: 2rem;"><img src="{%static 'microphone.png' %}" alt="mic" style="height: 50%;"></button>            
+  <button id="click_to_convert" data-toggle="tooltip"  data-placement="top" title="Tap to speak" style="display: flex;position: fixed;width: auto;height: 60px; justify-content: center;align-items:center;border-radius: 50%;left: 2rem;bottom: 2rem;background-color: #126ee2;"><img src="{%static 'microphone.png' %}" alt="mic" style="height: 70%;"></button>            
 	<!-- fotter -->
 	<!-- <footer class="section pb-4">
 		<div class="container">
@@ -1282,6 +1286,9 @@ padding: 10px;
       document.querySelector('#clickme').click()
   }
 
+  $(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
     // function click_function (){
     // }
 	</script>
