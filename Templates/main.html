@@ -1168,35 +1168,36 @@ padding: 10px;
 
 					<form method="POST" >
             {% csrf_token %}
-						<div class="position-relative">
+						<div class="position-relative" >
 							<div class="voice_to_text">
 
 								<textarea id="convert_text" class="form-control" name="cmd"
 									placeholder="Have a question? Just ask here or enter terms" style="box-shadow: none;
 								resize: none;height:70px;"></textarea>
+
                 <div class="button-search-main" style="display: flex; justify-content: center;align-items:center">
 									<button class="btn primary" type="submit" >Search</button>
-                  <button id="click_to_convert" class="custom-btn btn-16" style="display: flex; justify-content: center;align-items:center;border-radius: 50%;"><img src="{%static 'microphone.png' %}" alt="mic" style="height: 100%;"></button>
 								</div>
+                
                 <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show results</button> -->
-
 								<!-- <input id="convert_text" name="cmd" class="form-control"
-								placeholder="Have a question? Just ask here or enter terms"><i
-								class="ti-search search-icon" ></i> -->
-
-								<!-- <input id="search" class="form-control"
-									placeholder="Have a question? Just ask here or enter terms"><i
-									class="ti-search search-icon"></i>  -->
-							</div>
-						</div>
-					</form>
-
+                  placeholder="Have a question? Just ask here or enter terms"><i
+                  class="ti-search search-icon" ></i> -->
+                  
+                  <!-- <input id="search" class="form-control"
+                    placeholder="Have a question? Just ask here or enter terms"><i
+                    class="ti-search search-icon"></i>  -->
+                  </div>
+                </div>
+              </form>
+              
 					<!-- <div class="display-screen">
 						<div id="display"></div>
 					</div> -->
 				</div>
 			</div>
 		</div>
+    
 		<!-- /banner -->
 	</header>
 	<!-- /header -->
@@ -1224,7 +1225,7 @@ padding: 10px;
 
 	</section>
 	<!-- /call to action -->
-
+  <button id="click_to_convert"  style="display: flex;position: absolute; justify-content: center;align-items:center;border-radius: 50%;left: 0;bottom: 2rem;"><img src="{%static 'microphone.png' %}" alt="mic" style="height: 50%;"></button>            
 	<!-- fotter -->
 	<!-- <footer class="section pb-4">
 		<div class="container">
